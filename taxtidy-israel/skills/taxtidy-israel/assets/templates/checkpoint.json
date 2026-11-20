@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "case_id": null,
+  "taxpayer_id": null,
+  "revision": 0,
+  "preferred_language": "he",
+  "participants": [],
+  "years": [],
+  "synthetic": false,
+  "authorized_search_scope": [],
+  "observations": [],
+  "economic_items": [],
+  "conflicts": [],
+  "requirements": [],
+  "eligibility": [],
+  "events": [],
+  "attachments": [],
+  "routes": [],
+  "results": [],
+  "assumptions": [],
+  "next_actions": []
+}

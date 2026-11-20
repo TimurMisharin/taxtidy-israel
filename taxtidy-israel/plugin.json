@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "taxtidy-israel",
+  "version": "0.1.0",
+  "description": "Find your tax documents, estimate your refund or balance due, and see what still needs filing.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "TaxTidy Israel",
+        "shortDescription": "Find your tax documents, estimate your refund or balance due, and see what still needs filing.",
+        "capabilities": []
+      }
+    }
+  }
+}

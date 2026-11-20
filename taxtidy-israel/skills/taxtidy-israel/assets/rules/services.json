@@ -1,0 +1,23 @@
+{
+  "verified_at": "2026-11-19",
+  "refund_claims": [
+    {
+      "url": "https://www.gov.il/he/service/itc135",
+      "observed_at": "2026-11-19",
+      "transport": "web reader",
+      "refund_year": 2020,
+      "claim_deadline": "2026-12-31",
+      "hebrew_control": "להגשת הבקשה",
+      "scope": "refund window, not mandatory return deadline",
+      "evidence_sha256": "e95c0334111677c125fe5030cbd86b6fd27c994ebd12a56686aa204645a4c77d",
+      "hash_scope": "retained structured observation, not original HTML"
+    }
+  ],
+  "mandatory_deadlines": [],
+  "taxpayer_extensions": [],
+  "tax_coordination": {
+    "url": "https://www.gov.il/he/service/tax-coordination-online",
+    "verification": "unavailable_current_retrieval_HTTP403; do not infer active portal controls"
+  },
+  "source_scope": "Public service labels only, no authenticated portal inspected"
+}

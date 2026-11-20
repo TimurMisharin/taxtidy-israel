@@ -1,0 +1,1 @@
+"""Synthetic-only TaxTidy tests."""

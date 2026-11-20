@@ -1,0 +1,43 @@
+{
+  "case_id": null,
+  "expected_revision": null,
+  "observations": [
+    {
+      "owner": null,
+      "issuer": null,
+      "kind": "wages",
+      "document_type": "form_106",
+      "issue_date": null,
+      "period_start": null,
+      "period_end": null,
+      "event_date": null,
+      "settlement_date": null,
+      "tax_year": null,
+      "business_reference": null,
+      "amount": {
+        "value_state": "unknown",
+        "currency": "ILS",
+        "tax_year": null
+      },
+      "withholding": {
+        "value_state": "unknown",
+        "currency": "ILS",
+        "tax_year": null
+      },
+      "provenance": "missing",
+      "classification": "unresolved",
+      "source": {
+        "text": null,
+        "sha256": null,
+        "page": null,
+        "field": null
+      },
+      "review": {
+        "reviewer": null,
+        "owner_year_checked": false,
+        "fields_checked": [],
+        "method": "manual"
+      }
+    }
+  ]
+}

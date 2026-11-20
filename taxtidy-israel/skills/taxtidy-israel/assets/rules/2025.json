@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "tax_year": 2025,
+  "currency": "ILS",
+  "engine_version": "0.2.1",
+  "verified_at": "2026-11-19",
+  "sources": {
+    "booklet": {
+      "url": "https://www.gov.il/BlobFolder/generalpage/income-tax-monthly-deductions-booklet/he/generalInformation_income-tax-monthly-deductions-booklet_monthly-deductions-booklet-2025.pdf",
+      "sha256": "41496dd374f5e3a397b17b5dfdfd2055537b66bac4c2fc4543d544406522fd73",
+      "bytes": 634379,
+      "retrieved_at": "2026-11-19",
+      "transport": "system curl with TLS verification",
+      "effective_year": 2025,
+      "visually_checked_pdf_pages": [
+        8
+      ]
+    },
+    "guide": {
+      "url": "https://www.gov.il/BlobFolder/generalpage/income-tax-guide-knowyourright/he/Guides_IncomeTax_da-2025.pdf",
+      "sha256": "5012033e55e0c415a3b50a797acb2d5b5ddae06e2bdbe16c466c78baec9960d0",
+      "bytes": 4991233,
+      "retrieved_at": "2026-11-19",
+      "transport": "system curl with TLS verification",
+      "effective_year": 2025,
+      "visually_checked_pdf_pages": [
+        17,
+        29,
+        30,
+        49,
+        57,
+        66,
+        72,
+        73,
+        98
+      ]
+    },
+    "1322": {
+      "url": "https://www.gov.il/BlobFolder/service/reporting-and-payment-2025-annual-tax-report-for-individuals/he/Service_Pages_Income_tax_annual-report-2026_1322-2025-ACC.pdf",
+      "sha256": "7a40ee36e012057e359ada6c6a7f4e0c4a33a4d77e933066be6069ccb23f0bff",
+      "bytes": 101867,
+      "retrieved_at": "2026-11-19",
+      "transport": "system curl with TLS verification",
+      "effective_year": 2025,
+      "visually_checked_pdf_pages": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "rules": {
+    "brackets": {
+      "value": [
+        {
+          "upper": "84120",
+          "rate": "0.10"
+        },
+        {
+          "upper": "120720",
+          "rate": "0.14"
+        },
+        {
+          "upper": "193800",
+          "rate": "0.20"
+        },
+        {
+          "upper": "269280",
+          "rate": "0.31"
+        },
+        {
+          "upper": "560280",
+          "rate": "0.35"
+        },
+        {
+          "upper": null,
+          "rate": "0.47"
+        }
+      ],
+      "source_id": "booklet",
+      "pdf_page": 8,
+      "section": "annual personal-effort income",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "credit_point": {
+      "value": "2904",
+      "source_id": "guide",
+      "pdf_page": 17,
+      "section": "personal credits",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "resident_male_points": {
+      "value": "2.25",
+      "source_id": "guide",
+      "pdf_page": 66,
+      "section": "section 61: resident and travel points",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "donation_rate": {
+      "value": "0.35",
+      "source_id": "guide",
+      "pdf_page": 72,
+      "section": "section 78",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "donation_minimum_exclusive": {
+      "value": "207",
+      "source_id": "guide",
+      "pdf_page": 72,
+      "section": "section 78",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "donation_income_fraction": {
+      "value": "0.30",
+      "source_id": "guide",
+      "pdf_page": 72,
+      "section": "section 78",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "donation_ceiling": {
+      "value": "10354816",
+      "source_id": "guide",
+      "pdf_page": 72,
+      "section": "section 78",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "donation_carryforward_years": {
+      "value": 3,
+      "source_id": "guide",
+      "pdf_page": 73,
+      "section": "section 78: excess over ceiling; previous carry-in disabled",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "securities_rate": {
+      "value": "0.25",
+      "source_id": "1322",
+      "pdf_page": 3,
+      "section": "real listed-security gain; nonmaterial holder",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "loss_offset": {
+      "value": "current domestic eligible realized loss against compatible capital gain, one-for-one; remove same-institution offsets from both gross buckets before cross-institution pooling",
+      "source_id": "guide",
+      "pdf_page": 49,
+      "section": "capital losses",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "reserve": {
+      "value": "employer-paid benefit included in Form106 counted as wages only; employee direct National Insurance reserve benefit not included in Form106 is taxable personal-effort income; cross-year allocation disabled",
+      "source_id": "guide",
+      "pdf_page": 30,
+      "section": "sections 2 and 3",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "assistance_taxable": {
+      "value": "employee income-replacement assistance from IDF assistance fund is employment income; require annual certificate",
+      "source_id": "guide",
+      "pdf_page": 29,
+      "section": "section 1 assistance-fund grants",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "assistance_excluded": {
+      "value": "Section18 special/additional reserve grant is not income; separate special levy is not Israeli annual income-tax withholding",
+      "source_id": "guide",
+      "pdf_page": 57,
+      "section": "section 45(d)",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "surcharge_boundary": {
+      "value": "721560",
+      "source_id": "guide",
+      "pdf_page": 98,
+      "section": "additional tax: coverage stops before threshold",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    },
+    "rounding": {
+      "value": "exact decimal estimate; no statutory intermediate/final rounding asserted; filing-ready output disabled; report fields are whole ILS under guide but fractional-input allocation and rounding stages remain unverified",
+      "source_id": "guide",
+      "pdf_page": 17,
+      "section": "general form instructions and personal credits",
+      "effective_year": 2025,
+      "verified_at": "2026-11-19",
+      "verified": true
+    }
+  },
+  "coverage": {
+    "resident_full_year": true,
+    "sex": "male",
+    "adult_under_60": true,
+    "unmarried": true,
+    "other_entitlements_or_deductions": false,
+    "foreign_facts": false,
+    "income_ceiling_exclusive": "721560",
+    "supported": [
+      "reconciled wages",
+      "domestic listed-share realized gain/loss at 25 percent, no dividends/interest/carry-ins",
+      "single-owner settled ILS Section46 donations with date-specific approval",
+      "employee National Insurance reserve benefit received in same year",
+      "verified zero or distinct advance tax payments",
+      "conditional assistance classification scenarios"
+    ],
+    "unsupported": [
+      "spouse/children/residence changes",
+      "nonzero pension or insurance contributions",
+      "other credits or deductions",
+      "foreign income/assets/currency/tax credits",
+      "material shareholders/business securities/related parties/REIT/bonds",
+      "dividends or interest",
+      "loss or donation carry-in",
+      "cross-year benefit or donation allocation",
+      "unverified receipt approval/settlement/cancellation/fees/benefits",
+      "surcharge/high income",
+      "statutory filing rounding"
+    ],
+    "filing_ready": false
+  }
+}

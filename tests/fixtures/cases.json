@@ -1,0 +1,1665 @@
+{
+  "synthetic": true,
+  "baseline": [
+    {
+      "owner": "fictional-taxpayer",
+      "issuer": "fictional-employer-a",
+      "kind": "wages",
+      "document_type": "a99_5",
+      "issue_date": "2026-02-01",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "event_date": null,
+      "settlement_date": null,
+      "tax_year": 2025,
+      "business_reference": "A-2025-A99",
+      "amount": {
+        "value_state": "known",
+        "amount": "80000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "withholding": {
+        "value_state": "known",
+        "amount": "8000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "provenance": "verified_source",
+      "classification": "taxable_wages",
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-a; a99_5; year 2025; period 2025-01-01 to 2025-12-31; taxable wages ILS 80000; tax withheld ILS 8000; reference A-2025-A99. This is fictional reviewed text, not a real certificate.",
+        "sha256": "c2ebbfe41481cbfba9d6073e51e5068841acbc8ef36b23edb840af0818369021",
+        "page": 1,
+        "field": "annual taxable wages and tax withheld"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "amount",
+          "withholding",
+          "classification",
+          "period"
+        ],
+        "method": "manual"
+      }
+    },
+    {
+      "owner": "fictional-taxpayer",
+      "issuer": "fictional-employer-b",
+      "kind": "wages",
+      "document_type": "form_106",
+      "issue_date": "2026-02-01",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "event_date": null,
+      "settlement_date": null,
+      "tax_year": 2025,
+      "business_reference": "B-2025-106",
+      "amount": {
+        "value_state": "known",
+        "amount": "40000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "withholding": {
+        "value_state": "known",
+        "amount": "4000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "provenance": "verified_source",
+      "classification": "taxable_wages",
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-b; form_106; year 2025; period 2025-01-01 to 2025-12-31; taxable wages ILS 40000; tax withheld ILS 4000; reference B-2025-106. This is fictional reviewed text, not a real certificate.",
+        "sha256": "2fd5aa6ff39c7e8082f5662d6d556d0b290fe9267748a5ae3a45f5be2b385713",
+        "page": 1,
+        "field": "annual taxable wages and tax withheld"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "amount",
+          "withholding",
+          "classification",
+          "period"
+        ],
+        "method": "manual"
+      }
+    }
+  ],
+  "corroborating": [
+    {
+      "owner": "fictional-taxpayer",
+      "issuer": "fictional-employer-a",
+      "kind": "wages",
+      "document_type": "payslip_ytd",
+      "issue_date": "2026-02-01",
+      "period_start": "2025-01-01",
+      "period_end": "2025-09-30",
+      "event_date": null,
+      "settlement_date": null,
+      "tax_year": 2025,
+      "business_reference": "A-2025-09",
+      "amount": {
+        "value_state": "known",
+        "amount": "60000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "withholding": {
+        "value_state": "known",
+        "amount": "6000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "provenance": "verified_source",
+      "classification": "taxable_wages",
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-a; payslip_ytd; year 2025; period 2025-01-01 to 2025-09-30; taxable wages ILS 60000; tax withheld ILS 6000; reference A-2025-09. This is fictional reviewed text, not a real certificate.",
+        "sha256": "b67b28de9a11baf020da22413a2f7d00fc5a9aaf74e635c7acad5f327136c3d4",
+        "page": 1,
+        "field": "annual taxable wages and tax withheld"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "amount",
+          "withholding",
+          "classification",
+          "period"
+        ],
+        "method": "manual"
+      }
+    },
+    {
+      "owner": "fictional-taxpayer",
+      "issuer": "fictional-employer-a",
+      "kind": "wages",
+      "document_type": "payslip_ytd",
+      "issue_date": "2026-02-01",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "event_date": null,
+      "settlement_date": null,
+      "tax_year": 2025,
+      "business_reference": "A-2025-12",
+      "amount": {
+        "value_state": "known",
+        "amount": "80000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "withholding": {
+        "value_state": "known",
+        "amount": "8000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "provenance": "verified_source",
+      "classification": "taxable_wages",
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-a; payslip_ytd; year 2025; period 2025-01-01 to 2025-12-31; taxable wages ILS 80000; tax withheld ILS 8000; reference A-2025-12. This is fictional reviewed text, not a real certificate.",
+        "sha256": "c546c51f0d71f9a43d3ed512addc94f9c3572392916c3c15c710a08bc11fc38a",
+        "page": 1,
+        "field": "annual taxable wages and tax withheld"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "amount",
+          "withholding",
+          "classification",
+          "period"
+        ],
+        "method": "manual"
+      }
+    },
+    {
+      "owner": "fictional-taxpayer",
+      "issuer": "fictional-employer-a",
+      "kind": "wages",
+      "document_type": "form_106",
+      "issue_date": "2026-02-01",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "event_date": null,
+      "settlement_date": null,
+      "tax_year": 2025,
+      "business_reference": "A-2025-106",
+      "amount": {
+        "value_state": "known",
+        "amount": "80000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "withholding": {
+        "value_state": "known",
+        "amount": "8000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "provenance": "verified_source",
+      "classification": "taxable_wages",
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-a; form_106; year 2025; period 2025-01-01 to 2025-12-31; taxable wages ILS 80000; tax withheld ILS 8000; reference A-2025-106. This is fictional reviewed text, not a real certificate.",
+        "sha256": "a3352a5248d817a83cfd3f66be090eaff8f32098efc993e04d09d4725745d324",
+        "page": 1,
+        "field": "annual taxable wages and tax withheld"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "amount",
+          "withholding",
+          "classification",
+          "period"
+        ],
+        "method": "manual"
+      }
+    }
+  ],
+  "conflicting_106": {
+    "owner": "fictional-taxpayer",
+    "issuer": "fictional-employer-a",
+    "kind": "wages",
+    "document_type": "form_106",
+    "issue_date": "2026-02-01",
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "event_date": null,
+    "settlement_date": null,
+    "tax_year": 2025,
+    "business_reference": "A-2025-106-DISPUTED",
+    "amount": {
+      "value_state": "known",
+      "amount": "82000",
+      "currency": "ILS",
+      "tax_year": 2025
+    },
+    "withholding": {
+      "value_state": "known",
+      "amount": "8000",
+      "currency": "ILS",
+      "tax_year": 2025
+    },
+    "provenance": "verified_source",
+    "classification": "taxable_wages",
+    "source": {
+      "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-a; form_106; year 2025; period 2025-01-01 to 2025-12-31; taxable wages ILS 82000; tax withheld ILS 8000; reference A-2025-106-DISPUTED. This is fictional reviewed text, not a real certificate.",
+      "sha256": "f5db7f63767ae244eafa547de6014fcbf81d24195ddbf90e710b30705c6f128f",
+      "page": 1,
+      "field": "annual taxable wages and tax withheld"
+    },
+    "review": {
+      "reviewer": "synthetic-fixture-author",
+      "owner_year_checked": true,
+      "fields_checked": [
+        "amount",
+        "withholding",
+        "classification",
+        "period"
+      ],
+      "method": "manual"
+    }
+  },
+  "withholding_conflict": {
+    "owner": "fictional-taxpayer",
+    "issuer": "fictional-employer-a",
+    "kind": "wages",
+    "document_type": "form_106",
+    "issue_date": "2026-02-01",
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "event_date": null,
+    "settlement_date": null,
+    "tax_year": 2025,
+    "business_reference": "A-2025-106-TAX-DISPUTED",
+    "amount": {
+      "value_state": "known",
+      "amount": "80000",
+      "currency": "ILS",
+      "tax_year": 2025
+    },
+    "withholding": {
+      "value_state": "known",
+      "amount": "8200",
+      "currency": "ILS",
+      "tax_year": 2025
+    },
+    "provenance": "verified_source",
+    "classification": "taxable_wages",
+    "source": {
+      "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-a; form_106; year 2025; period 2025-01-01 to 2025-12-31; taxable wages ILS 80000; tax withheld ILS 8200; reference A-2025-106-TAX-DISPUTED. This is fictional reviewed text, not a real certificate.",
+      "sha256": "c56851fefa73198cd7151b69981915fab29063cbef852d129dec796e7ca39f5e",
+      "page": 1,
+      "field": "annual taxable wages and tax withheld"
+    },
+    "review": {
+      "reviewer": "synthetic-fixture-author",
+      "owner_year_checked": true,
+      "fields_checked": [
+        "amount",
+        "withholding",
+        "classification",
+        "period"
+      ],
+      "method": "manual"
+    }
+  },
+  "expected": {
+    "tax_year": 2025,
+    "currency": "ILS",
+    "wage_base": "120000",
+    "explanation": "Independent arithmetic: 80000 + 40000 = 120000; overlapping source documents are corroboration. No annual tax expected value or rule is defined in phase 1."
+  },
+  "canonical_vector": {
+    "value": {
+      "b": 2,
+      "a": 1
+    },
+    "utf8": "{\"a\":1,\"b\":2}",
+    "sha256": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777",
+    "oracle": "OpenSSL SHA-256 over the literal 13-byte UTF-8 sequence, no newline; generated independently of case.canonical/digest."
+  },
+  "annual_oracles": {
+    "baseline": {
+      "wages": "120000",
+      "bracket_tax": "13435.20",
+      "personal_credit": "6534",
+      "before_donations": "6901.20",
+      "withheld": "12000",
+      "direction": "estimated_refund",
+      "balance": "5098.80"
+    },
+    "donation": {
+      "donations": "1000",
+      "donation_credit": "350",
+      "liability": "6551.20",
+      "withheld": "12000",
+      "balance": "5448.80"
+    },
+    "due": {
+      "wages": "120000",
+      "donations": "1000",
+      "withheld": "5851.20",
+      "liability": "6551.20",
+      "direction": "estimated_additional_tax",
+      "balance": "700.00"
+    },
+    "banks": {
+      "realized_gain": "8000",
+      "eligible_loss": "5000",
+      "remaining_gain": "3000",
+      "tax_before_credits": "750",
+      "personal_credit_allowed": "750",
+      "liability": "0",
+      "withheld": "2000",
+      "refund": "2000"
+    },
+    "reserve": {
+      "wages": "120000",
+      "direct_benefit": "10000",
+      "assistance": "2000",
+      "withheld": "14000",
+      "excluded_liability": "8858",
+      "taxable_liability": "9258",
+      "scenario_difference": "400"
+    }
+  },
+  "oracle_derivation": "Hand calculation before production implementation: 84120*0.10 + (120000-84120)*0.14 = 13435.20; 2.25*2904=6534; baseline liability6901.20; donation1000*0.35=350 =>6551.20; fixed withheld5851.20 =>700 due. Banks(8000-5000)*0.25=750, resident credits limited to750 =>zero liability, refund equals withholding2000. Reserve ordinary130000: 8412+5124+(130000-120720)*0.20-6534=8858; additional2000 at20percent =>9258, delta400. No fixture payment is generated from calculator output.",
+  "phase2": {
+    "profile": {
+      "kind": "profile",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2025,
+      "facts": {
+        "resident_full_year": true,
+        "sex": "male",
+        "adult_under_60": true,
+        "unmarried": true,
+        "all_income_declared": true,
+        "all_payments_declared": true,
+        "other_entitlements_or_deductions": false,
+        "pension_or_insurance_contributions": false,
+        "foreign_facts": false,
+        "prior_loss_or_donation_carry_in": false
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional taxpayer; reviewed coverage declarations and identity evidence; {\"facts\": {\"adult_under_60\": true, \"all_income_declared\": true, \"all_payments_declared\": true, \"foreign_facts\": false, \"other_entitlements_or_deductions\": false, \"pension_or_insurance_contributions\": false, \"prior_loss_or_donation_carry_in\": false, \"resident_full_year\": true, \"sex\": \"male\", \"unmarried\": true}, \"kind\": \"profile\", \"owner\": \"fictional-taxpayer\", \"tax_year\": 2025}",
+        "sha256": "ffbde4fe205aaeb3c6b2413aa9f510fa370e2e4fb2b5fd07b7585f6b1fdd46e2",
+        "page": 1,
+        "field": "reviewed coverage declarations and identity evidence"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "profile"
+        ],
+        "method": "manual"
+      }
+    },
+    "banks": [
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-bank-a",
+        "kind": "securities",
+        "document_type": "form_867",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": null,
+        "settlement_date": null,
+        "tax_year": 2025,
+        "business_reference": "account-a-2025",
+        "amount": {
+          "value_state": "known",
+          "amount": "8000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "2000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "securities",
+        "details": {
+          "realized_loss": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "prior_offset": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "sale_proceeds": {
+            "value_state": "known",
+            "amount": "20000",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "dividends": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "interest": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "foreign_tax": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "loss_carry_in": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "basis": "gross_before_institution_offsets",
+          "asset_class": "domestic_listed_shares",
+          "sole_owner": true,
+          "material_holder": false,
+          "business_or_related_party": false,
+          "rate": "0.25"
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; form_867; {\"amount\": {\"amount\": \"8000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"account-a-2025\", \"classification\": \"securities\", \"details\": {\"asset_class\": \"domestic_listed_shares\", \"basis\": \"gross_before_institution_offsets\", \"business_or_related_party\": false, \"dividends\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"foreign_tax\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"interest\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"loss_carry_in\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"material_holder\": false, \"prior_offset\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"rate\": \"0.25\", \"realized_loss\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"sale_proceeds\": {\"amount\": \"20000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"sole_owner\": true}, \"document_type\": \"form_867\", \"event_date\": null, \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-bank-a\", \"kind\": \"securities\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": null, \"tax_year\": 2025, \"withholding\": {\"amount\": \"2000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "d8570c593b6c59e6ea803e03cac865ae4700c978ef3bfef881ac520c50bc19a6",
+          "page": 1,
+          "field": "form_867"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-bank-b",
+        "kind": "securities",
+        "document_type": "form_867",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": null,
+        "settlement_date": null,
+        "tax_year": 2025,
+        "business_reference": "account-b-2025",
+        "amount": {
+          "value_state": "known",
+          "amount": "0",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "0",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "securities",
+        "details": {
+          "realized_loss": {
+            "value_state": "known",
+            "amount": "5000",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "prior_offset": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "sale_proceeds": {
+            "value_state": "known",
+            "amount": "20000",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "dividends": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "interest": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "foreign_tax": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "loss_carry_in": {
+            "value_state": "known",
+            "amount": "0",
+            "currency": "ILS",
+            "tax_year": 2025
+          },
+          "basis": "gross_before_institution_offsets",
+          "asset_class": "domestic_listed_shares",
+          "sole_owner": true,
+          "material_holder": false,
+          "business_or_related_party": false,
+          "rate": "0.25"
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; form_867; {\"amount\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"account-b-2025\", \"classification\": \"securities\", \"details\": {\"asset_class\": \"domestic_listed_shares\", \"basis\": \"gross_before_institution_offsets\", \"business_or_related_party\": false, \"dividends\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"foreign_tax\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"interest\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"loss_carry_in\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"material_holder\": false, \"prior_offset\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"rate\": \"0.25\", \"realized_loss\": {\"amount\": \"5000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"sale_proceeds\": {\"amount\": \"20000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"sole_owner\": true}, \"document_type\": \"form_867\", \"event_date\": null, \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-bank-b\", \"kind\": \"securities\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": null, \"tax_year\": 2025, \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "3d985f1e5e51013450a4af3ea96cd08cabab06c27694aa3ef19a44f75ecf5d74",
+          "page": 1,
+          "field": "form_867"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      }
+    ],
+    "donations": [
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-charity",
+        "kind": "donation",
+        "document_type": "donation_receipt",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": "2025-06-01",
+        "settlement_date": "2025-06-01",
+        "tax_year": 2025,
+        "business_reference": "RECEIPT-2025-ONE",
+        "amount": {
+          "value_state": "known",
+          "amount": "1000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "0",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "donation",
+        "details": {
+          "sole_donor": true,
+          "settled_same_year": true,
+          "approval_from": "2025-01-01",
+          "approval_to": "2025-12-31",
+          "approval_reference": "synthetic-Section46-2025-proof",
+          "cancelled": false,
+          "fees_or_benefit": false,
+          "installments": false,
+          "carry_in": false,
+          "payroll_applied_credit": {
+            "value_state": "known",
+            "amount": "350",
+            "currency": "ILS",
+            "tax_year": 2025
+          }
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; donation_receipt; {\"amount\": {\"amount\": \"1000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"RECEIPT-2025-ONE\", \"classification\": \"donation\", \"details\": {\"approval_from\": \"2025-01-01\", \"approval_reference\": \"synthetic-Section46-2025-proof\", \"approval_to\": \"2025-12-31\", \"cancelled\": false, \"carry_in\": false, \"fees_or_benefit\": false, \"installments\": false, \"payroll_applied_credit\": {\"amount\": \"350\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"settled_same_year\": true, \"sole_donor\": true}, \"document_type\": \"donation_receipt\", \"event_date\": \"2025-06-01\", \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-charity\", \"kind\": \"donation\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": \"2025-06-01\", \"tax_year\": 2025, \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "4df6683b48a689cb8010a4363e6748e992aebe505b24bb3c23e1cf25006bc321",
+          "page": 1,
+          "field": "donation_receipt"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-charity",
+        "kind": "donation",
+        "document_type": "forwarded_receipt",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": "2025-06-01",
+        "settlement_date": "2025-06-01",
+        "tax_year": 2025,
+        "business_reference": "RECEIPT-2025-ONE",
+        "amount": {
+          "value_state": "known",
+          "amount": "1000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "0",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "donation",
+        "details": {
+          "sole_donor": true,
+          "settled_same_year": true,
+          "approval_from": "2025-01-01",
+          "approval_to": "2025-12-31",
+          "approval_reference": "synthetic-Section46-2025-proof",
+          "cancelled": false,
+          "fees_or_benefit": false,
+          "installments": false,
+          "carry_in": false,
+          "payroll_applied_credit": {
+            "value_state": "known",
+            "amount": "350",
+            "currency": "ILS",
+            "tax_year": 2025
+          }
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; forwarded_receipt; {\"amount\": {\"amount\": \"1000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"RECEIPT-2025-ONE\", \"classification\": \"donation\", \"details\": {\"approval_from\": \"2025-01-01\", \"approval_reference\": \"synthetic-Section46-2025-proof\", \"approval_to\": \"2025-12-31\", \"cancelled\": false, \"carry_in\": false, \"fees_or_benefit\": false, \"installments\": false, \"payroll_applied_credit\": {\"amount\": \"350\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"settled_same_year\": true, \"sole_donor\": true}, \"document_type\": \"forwarded_receipt\", \"event_date\": \"2025-06-01\", \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-charity\", \"kind\": \"donation\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": \"2025-06-01\", \"tax_year\": 2025, \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "4a462ccf7bef0f303b91be91204a211cca714fb04d3326f4a4058cb83e9cc100",
+          "page": 1,
+          "field": "forwarded_receipt"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-charity",
+        "kind": "donation",
+        "document_type": "authority_donation",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": "2025-06-01",
+        "settlement_date": "2025-06-01",
+        "tax_year": 2025,
+        "business_reference": "RECEIPT-2025-ONE",
+        "amount": {
+          "value_state": "known",
+          "amount": "1000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "0",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "donation",
+        "details": {
+          "sole_donor": true,
+          "settled_same_year": true,
+          "approval_from": "2025-01-01",
+          "approval_to": "2025-12-31",
+          "approval_reference": "synthetic-Section46-2025-proof",
+          "cancelled": false,
+          "fees_or_benefit": false,
+          "installments": false,
+          "carry_in": false,
+          "payroll_applied_credit": {
+            "value_state": "known",
+            "amount": "350",
+            "currency": "ILS",
+            "tax_year": 2025
+          }
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; authority_donation; {\"amount\": {\"amount\": \"1000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"RECEIPT-2025-ONE\", \"classification\": \"donation\", \"details\": {\"approval_from\": \"2025-01-01\", \"approval_reference\": \"synthetic-Section46-2025-proof\", \"approval_to\": \"2025-12-31\", \"cancelled\": false, \"carry_in\": false, \"fees_or_benefit\": false, \"installments\": false, \"payroll_applied_credit\": {\"amount\": \"350\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"settled_same_year\": true, \"sole_donor\": true}, \"document_type\": \"authority_donation\", \"event_date\": \"2025-06-01\", \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-charity\", \"kind\": \"donation\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": \"2025-06-01\", \"tax_year\": 2025, \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "34c7d78ca0a4d806cb51530070208ce0f91b31c96807ea94fd59bb5f7ae8dfc7",
+          "page": 1,
+          "field": "authority_donation"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      }
+    ],
+    "reserve": [
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-employer-a",
+        "kind": "reserve",
+        "document_type": "employer_benefit_certificate",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": "2025-05-01",
+        "settlement_date": "2025-05-01",
+        "tax_year": 2025,
+        "business_reference": "employer-benefit",
+        "amount": {
+          "value_state": "known",
+          "amount": "10000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "0",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "reserve",
+        "details": {
+          "included_in_wages": true,
+          "wage_item": "bf4ae40a06b365df7e1024d89d3f96b0b70d138de3c9aac9f623a141fca1de46",
+          "program": "national_insurance_employee_reserve",
+          "same_year_receipt_and_service": true
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; employer_benefit_certificate; {\"amount\": {\"amount\": \"10000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"employer-benefit\", \"classification\": \"reserve\", \"details\": {\"included_in_wages\": true, \"program\": \"national_insurance_employee_reserve\", \"same_year_receipt_and_service\": true, \"wage_item\": \"bf4ae40a06b365df7e1024d89d3f96b0b70d138de3c9aac9f623a141fca1de46\"}, \"document_type\": \"employer_benefit_certificate\", \"event_date\": \"2025-05-01\", \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-employer-a\", \"kind\": \"reserve\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": \"2025-05-01\", \"tax_year\": 2025, \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "6622111ca2f854f8992f0226ae447052b274875d0bcd361604c5b730a5e6c6c9",
+          "page": 1,
+          "field": "employer_benefit_certificate"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-national-insurance",
+        "kind": "reserve",
+        "document_type": "national_insurance_certificate",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": "2025-07-01",
+        "settlement_date": "2025-07-01",
+        "tax_year": 2025,
+        "business_reference": "direct-benefit",
+        "amount": {
+          "value_state": "known",
+          "amount": "10000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "2000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "reserve",
+        "details": {
+          "included_in_wages": false,
+          "wage_item": null,
+          "program": "national_insurance_employee_reserve",
+          "same_year_receipt_and_service": true
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; national_insurance_certificate; {\"amount\": {\"amount\": \"10000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"direct-benefit\", \"classification\": \"reserve\", \"details\": {\"included_in_wages\": false, \"program\": \"national_insurance_employee_reserve\", \"same_year_receipt_and_service\": true, \"wage_item\": null}, \"document_type\": \"national_insurance_certificate\", \"event_date\": \"2025-07-01\", \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-national-insurance\", \"kind\": \"reserve\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": \"2025-07-01\", \"tax_year\": 2025, \"withholding\": {\"amount\": \"2000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "4eeb21ef3ad9be9578c734327168a75b08e1ecb4fe2310c5e226a44ea3e65045",
+          "page": 1,
+          "field": "national_insurance_certificate"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "owner": "fictional-taxpayer",
+        "issuer": "fictional-assistance-payer",
+        "kind": "assistance",
+        "document_type": "payment_record",
+        "issue_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "event_date": "2025-08-01",
+        "settlement_date": "2025-08-01",
+        "tax_year": 2025,
+        "business_reference": "unknown-assistance",
+        "amount": {
+          "value_state": "known",
+          "amount": "2000",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "withholding": {
+          "value_state": "known",
+          "amount": "0",
+          "currency": "ILS",
+          "tax_year": 2025
+        },
+        "provenance": "verified_source",
+        "classification": "unresolved",
+        "details": {
+          "program": "unknown"
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; fictional taxpayer; payment_record; {\"amount\": {\"amount\": \"2000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"unknown-assistance\", \"classification\": \"unresolved\", \"details\": {\"program\": \"unknown\"}, \"document_type\": \"payment_record\", \"event_date\": \"2025-08-01\", \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-assistance-payer\", \"kind\": \"assistance\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": \"2025-08-01\", \"tax_year\": 2025, \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+          "sha256": "9ddc8010c07bc9ac2e58781c559d5ba791f2299477ec2bd78a7cfabce615fa73",
+          "page": 1,
+          "field": "payment_record"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "amount",
+            "withholding",
+            "classification",
+            "period",
+            "details"
+          ],
+          "method": "manual"
+        }
+      }
+    ],
+    "advance": {
+      "owner": "fictional-taxpayer",
+      "issuer": "fictional-tax-authority",
+      "kind": "advance_payment",
+      "document_type": "tax_payment_receipt",
+      "issue_date": "2026-02-01",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "event_date": "2025-09-01",
+      "settlement_date": "2025-09-01",
+      "tax_year": 2025,
+      "business_reference": "payment-copy-a",
+      "amount": {
+        "value_state": "known",
+        "amount": "500",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "withholding": {
+        "value_state": "known",
+        "amount": "0",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "provenance": "verified_source",
+      "classification": "advance_payment",
+      "details": {
+        "payment_id": "payment-2025-one"
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional taxpayer; tax_payment_receipt; {\"amount\": {\"amount\": \"500\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"business_reference\": \"payment-copy-a\", \"classification\": \"advance_payment\", \"details\": {\"payment_id\": \"payment-2025-one\"}, \"document_type\": \"tax_payment_receipt\", \"event_date\": \"2025-09-01\", \"issue_date\": \"2026-02-01\", \"issuer\": \"fictional-tax-authority\", \"kind\": \"advance_payment\", \"owner\": \"fictional-taxpayer\", \"period_end\": \"2025-12-31\", \"period_start\": \"2025-01-01\", \"provenance\": \"verified_source\", \"settlement_date\": \"2025-09-01\", \"tax_year\": 2025, \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}",
+        "sha256": "292b1fa664041524d8884acfb5b5fa3a699ce32b0d7c4760e3cb9986ad139f3f",
+        "page": 1,
+        "field": "tax_payment_receipt"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "amount",
+          "withholding",
+          "classification",
+          "period",
+          "details"
+        ],
+        "method": "manual"
+      }
+    }
+  },
+  "phase3": {
+    "draft": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2025,
+      "kind": "return",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-draft-1",
+      "provenance": "verified_source",
+      "details": {
+        "status": "draft_saved"
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"status\": \"draft_saved\"}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"return\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-draft-1\", \"tax_year\": 2025}",
+        "sha256": "f839658783a9f3751b08d36a711b5c37f01594ae7890e6d8a054a7d001b833d1",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "ack": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2025,
+      "kind": "return",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-ack-1",
+      "provenance": "verified_source",
+      "details": {
+        "status": "filing_acknowledged"
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"status\": \"filing_acknowledged\"}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"return\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-ack-1\", \"tax_year\": 2025}",
+        "sha256": "27f0c42173117209fbb85c34dd428c19ac378d6b975a15557837f259bcea89b5",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "rejected": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2025,
+      "kind": "attachment",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-rejected",
+      "provenance": "verified_source",
+      "details": {
+        "filename": "bank-2025-original.pdf",
+        "sha256": "e41231eb8ca740cde9cf1c6c781e51dd52d9bdcb7f04f9222667d88a6d9d62d1",
+        "purpose": "Form867 annual certificate",
+        "status": "rejected"
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"filename\": \"bank-2025-original.pdf\", \"purpose\": \"Form867 annual certificate\", \"sha256\": \"e41231eb8ca740cde9cf1c6c781e51dd52d9bdcb7f04f9222667d88a6d9d62d1\", \"status\": \"rejected\"}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"attachment\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-rejected\", \"tax_year\": 2025}",
+        "sha256": "6d4a1be68fd6f79d0dd95043b3e96707c0e8da1c3ed799b58c5fb1aeb1d3ff89",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "accepted": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2025,
+      "kind": "attachment",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-accepted",
+      "provenance": "verified_source",
+      "details": {
+        "filename": "bank-2025-corrected.pdf",
+        "sha256": "c11f7a4c54c5227a5ff84440aacc5089a256e5aa3502d238d3f73248f042cbc7",
+        "purpose": "Form867 annual certificate",
+        "status": "accepted"
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"filename\": \"bank-2025-corrected.pdf\", \"purpose\": \"Form867 annual certificate\", \"sha256\": \"c11f7a4c54c5227a5ff84440aacc5089a256e5aa3502d238d3f73248f042cbc7\", \"status\": \"accepted\"}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"attachment\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-accepted\", \"tax_year\": 2025}",
+        "sha256": "2d7aac638c39598e15792390157625d5964b4da7ca7daece7176de3a51d3847f",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "deadline": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2020,
+      "kind": "deadline",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-2020-deadline",
+      "provenance": "verified_source",
+      "details": {
+        "category": "refund_claim",
+        "base_deadline": "2026-12-31",
+        "extension_deadline": null,
+        "extension_applicable": false,
+        "extension_reference": null,
+        "source_url": "https://www.gov.il/he/service/itc135"
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"base_deadline\": \"2026-12-31\", \"category\": \"refund_claim\", \"extension_applicable\": false, \"extension_deadline\": null, \"extension_reference\": null, \"source_url\": \"https://www.gov.il/he/service/itc135\"}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"deadline\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-2020-deadline\", \"tax_year\": 2020}",
+        "sha256": "3d3faaba5a14c692ae917ea49d5eaf5881f7a69d4194c88899e89bff15b4ef88",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "due_wage": {
+      "owner": "fictional-taxpayer",
+      "issuer": "fictional-employer-a",
+      "kind": "wages",
+      "document_type": "form_106",
+      "issue_date": "2026-02-01",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "event_date": null,
+      "settlement_date": null,
+      "tax_year": 2025,
+      "business_reference": "due-2025",
+      "amount": {
+        "value_state": "known",
+        "amount": "120000",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "withholding": {
+        "value_state": "known",
+        "amount": "5851.20",
+        "currency": "ILS",
+        "tax_year": 2025
+      },
+      "provenance": "verified_source",
+      "classification": "taxable_wages",
+      "source": {
+        "text": "SYNTHETIC ONLY; fictional-taxpayer; fictional-employer-a; form_106; 2025; 2025-01-01 to 2025-12-31; taxable wages ILS 120000; tax withheld ILS 5851.20; reference due-2025; בדיקה.",
+        "sha256": "042c8ebcb49f628026090dd2d9197e02f3cf71748f588d903e31443e88f290af",
+        "page": 1,
+        "field": "taxable wages and tax withheld for stated period"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "amount",
+          "withholding",
+          "classification",
+          "period"
+        ],
+        "method": "manual"
+      }
+    },
+    "route": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2025,
+      "kind": "route",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-route-checks",
+      "provenance": "verified_source",
+      "details": {
+        "route_status": "unresolved",
+        "filing_obligation": "unresolved",
+        "checks": {
+          "securities": "unknown",
+          "rental_income": "unknown",
+          "prior_filing": "unknown",
+          "retirement": "unknown",
+          "foreign_assets": "unknown",
+          "foreign_income": "unknown",
+          "residence_change": "unknown",
+          "representation": "unknown",
+          "self_employment": "unknown",
+          "family_change": "unknown"
+        },
+        "spouse": {
+          "registered_spouse": "unknown",
+          "separate_income": "unknown",
+          "declarations": "unknown",
+          "marriage_year": "unknown",
+          "other_return": "unknown",
+          "form_4430": "unknown",
+          "signatures": "unknown",
+          "account_join_date": "unknown",
+          "joint_income": "unknown",
+          "ownership": "unknown"
+        },
+        "rules_source": null
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"checks\": {\"family_change\": \"unknown\", \"foreign_assets\": \"unknown\", \"foreign_income\": \"unknown\", \"prior_filing\": \"unknown\", \"rental_income\": \"unknown\", \"representation\": \"unknown\", \"residence_change\": \"unknown\", \"retirement\": \"unknown\", \"securities\": \"unknown\", \"self_employment\": \"unknown\"}, \"filing_obligation\": \"unresolved\", \"route_status\": \"unresolved\", \"rules_source\": null, \"spouse\": {\"account_join_date\": \"unknown\", \"declarations\": \"unknown\", \"form_4430\": \"unknown\", \"joint_income\": \"unknown\", \"marriage_year\": \"unknown\", \"other_return\": \"unknown\", \"ownership\": \"unknown\", \"registered_spouse\": \"unknown\", \"separate_income\": \"unknown\", \"signatures\": \"unknown\"}}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"route\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-route-checks\", \"tax_year\": 2025}",
+        "sha256": "62d817bdb01e14722fd5880318c4e1520fce311e3b0877f7703bc1ba14f4a0b7",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "portal_block": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2025,
+      "kind": "portal_block",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-block",
+      "provenance": "verified_source",
+      "details": {
+        "message": "SYNTHETIC: file permits refund requests only; selected return has tax due.",
+        "existing_inquiry_reference": "fictional-inquiry-open"
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"existing_inquiry_reference\": \"fictional-inquiry-open\", \"message\": \"SYNTHETIC: file permits refund requests only; selected return has tax due.\"}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"portal_block\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-block\", \"tax_year\": 2025}",
+        "sha256": "25eec5363094cc21732a92afc0debe4b95c9907cdfce3c3f10237719a9c87149",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "forecast": {
+      "record_type": "workflow_event",
+      "owner": "fictional-taxpayer",
+      "tax_year": 2026,
+      "kind": "forecast",
+      "form": "135",
+      "draft_version": "draft-1",
+      "event_date": "2026-11-19",
+      "observed_at": "2026-11-19",
+      "reference": "fictional-current-year-forecast",
+      "provenance": "user_statement",
+      "details": {
+        "payers": [
+          {
+            "issuer": "fictional-employer-a",
+            "as_of": "2026-11-19",
+            "actual_income": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "100000"
+            },
+            "withheld_to_date": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "10000"
+            },
+            "remaining_income": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "20000"
+            },
+            "bonus": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "5000"
+            }
+          },
+          {
+            "issuer": "fictional-employer-b",
+            "as_of": "2026-11-19",
+            "actual_income": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "10000"
+            },
+            "withheld_to_date": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "500"
+            },
+            "remaining_income": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "5000"
+            },
+            "bonus": {
+              "value_state": "known",
+              "currency": "ILS",
+              "tax_year": 2026,
+              "amount": "0"
+            }
+          }
+        ],
+        "assumptions": [
+          "Remaining gross pay follows declared contract months.",
+          "Bonus is the taxpayer estimate; no tax rate forecast is enabled."
+        ],
+        "payroll_relief": [
+          "Declared donation relief already reflected in payroll."
+        ]
+      },
+      "source": {
+        "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"assumptions\": [\"Remaining gross pay follows declared contract months.\", \"Bonus is the taxpayer estimate; no tax rate forecast is enabled.\"], \"payers\": [{\"actual_income\": {\"amount\": \"100000\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}, \"as_of\": \"2026-11-19\", \"bonus\": {\"amount\": \"5000\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}, \"issuer\": \"fictional-employer-a\", \"remaining_income\": {\"amount\": \"20000\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}, \"withheld_to_date\": {\"amount\": \"10000\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}}, {\"actual_income\": {\"amount\": \"10000\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}, \"as_of\": \"2026-11-19\", \"bonus\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}, \"issuer\": \"fictional-employer-b\", \"remaining_income\": {\"amount\": \"5000\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}, \"withheld_to_date\": {\"amount\": \"500\", \"currency\": \"ILS\", \"tax_year\": 2026, \"value_state\": \"known\"}}], \"payroll_relief\": [\"Declared donation relief already reflected in payroll.\"]}, \"draft_version\": \"draft-1\", \"event_date\": \"2026-11-19\", \"form\": \"135\", \"kind\": \"forecast\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"user_statement\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-current-year-forecast\", \"tax_year\": 2026}",
+        "sha256": "9a6d6aebe2e6c89164b3906fb473958e76c5584a081ec284b540b8faf15eaffc",
+        "page": 1,
+        "field": "reviewed synthetic fields"
+      },
+      "review": {
+        "reviewer": "synthetic-fixture-author",
+        "owner_year_checked": true,
+        "fields_checked": [
+          "event"
+        ],
+        "method": "manual"
+      }
+    },
+    "equity": [
+      {
+        "record_type": "workflow_event",
+        "owner": "fictional-taxpayer",
+        "tax_year": 2025,
+        "kind": "equity",
+        "form": "135",
+        "draft_version": "draft-1",
+        "event_date": "2025-08-01",
+        "observed_at": "2026-11-19",
+        "reference": "fictional-rsu-vest",
+        "provenance": "verified_source",
+        "details": {
+          "event_type": "vest",
+          "plan_type": "RSU",
+          "employer": "fictional-employer-a",
+          "administrator": "fictional-plan-admin",
+          "broker": "fictional-broker",
+          "trustee": "fictional-Israeli-trustee",
+          "plan_id": "fictional-plan",
+          "account": "fictional-broker-account",
+          "security": "fictional-share",
+          "quantity": "10",
+          "gross": {
+            "value_state": "unknown",
+            "currency": "USD",
+            "tax_year": 2025
+          },
+          "withholding": {
+            "value_state": "unknown",
+            "currency": "USD",
+            "tax_year": 2025
+          },
+          "payroll_component": {
+            "value_state": "known",
+            "currency": "ILS",
+            "tax_year": 2025,
+            "amount": "0"
+          },
+          "adjusted_basis": {
+            "value_state": "unknown",
+            "currency": "USD",
+            "tax_year": 2025
+          },
+          "payroll_item": null,
+          "destination": null,
+          "from_account": null,
+          "to_account": null
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"account\": \"fictional-broker-account\", \"adjusted_basis\": {\"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"unknown\"}, \"administrator\": \"fictional-plan-admin\", \"broker\": \"fictional-broker\", \"destination\": null, \"employer\": \"fictional-employer-a\", \"event_type\": \"vest\", \"from_account\": null, \"gross\": {\"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"unknown\"}, \"payroll_component\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"payroll_item\": null, \"plan_id\": \"fictional-plan\", \"plan_type\": \"RSU\", \"quantity\": \"10\", \"security\": \"fictional-share\", \"to_account\": null, \"trustee\": \"fictional-Israeli-trustee\", \"withholding\": {\"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"unknown\"}}, \"draft_version\": \"draft-1\", \"event_date\": \"2025-08-01\", \"form\": \"135\", \"kind\": \"equity\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-rsu-vest\", \"tax_year\": 2025}",
+          "sha256": "a1861ecce7ba4bba3f7f2620ad3608c0088f4e8f8ee1471d97697199ef89cd8b",
+          "page": 1,
+          "field": "reviewed synthetic fields"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "event"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "record_type": "workflow_event",
+        "owner": "fictional-taxpayer",
+        "tax_year": 2025,
+        "kind": "equity",
+        "form": "135",
+        "draft_version": "draft-1",
+        "event_date": "2025-09-01",
+        "observed_at": "2026-11-19",
+        "reference": "fictional-espp-sale",
+        "provenance": "verified_source",
+        "details": {
+          "event_type": "sale",
+          "plan_type": "ESPP",
+          "employer": "fictional-employer-a",
+          "administrator": "fictional-plan-admin",
+          "broker": "fictional-broker",
+          "trustee": "fictional-Israeli-trustee",
+          "plan_id": "fictional-plan",
+          "account": "fictional-broker-account",
+          "security": "fictional-share",
+          "quantity": "10",
+          "gross": {
+            "value_state": "known",
+            "currency": "ILS",
+            "tax_year": 2025,
+            "amount": "6000"
+          },
+          "withholding": {
+            "value_state": "known",
+            "currency": "ILS",
+            "tax_year": 2025,
+            "amount": "0"
+          },
+          "payroll_component": {
+            "value_state": "known",
+            "currency": "ILS",
+            "tax_year": 2025,
+            "amount": "5000"
+          },
+          "adjusted_basis": {
+            "value_state": "known",
+            "currency": "ILS",
+            "tax_year": 2025,
+            "amount": "5000"
+          },
+          "payroll_item": "bf4ae40a06b365df7e1024d89d3f96b0b70d138de3c9aac9f623a141fca1de46",
+          "destination": null,
+          "from_account": null,
+          "to_account": null
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"account\": \"fictional-broker-account\", \"adjusted_basis\": {\"amount\": \"5000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"administrator\": \"fictional-plan-admin\", \"broker\": \"fictional-broker\", \"destination\": null, \"employer\": \"fictional-employer-a\", \"event_type\": \"sale\", \"from_account\": null, \"gross\": {\"amount\": \"6000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"payroll_component\": {\"amount\": \"5000\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"payroll_item\": \"bf4ae40a06b365df7e1024d89d3f96b0b70d138de3c9aac9f623a141fca1de46\", \"plan_id\": \"fictional-plan\", \"plan_type\": \"ESPP\", \"quantity\": \"10\", \"security\": \"fictional-share\", \"to_account\": null, \"trustee\": \"fictional-Israeli-trustee\", \"withholding\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}}, \"draft_version\": \"draft-1\", \"event_date\": \"2025-09-01\", \"form\": \"135\", \"kind\": \"equity\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-espp-sale\", \"tax_year\": 2025}",
+          "sha256": "8fccacb2d73755b552ee9c9a8509a657fbf067b537e177ad47a455e1317bfe36",
+          "page": 1,
+          "field": "reviewed synthetic fields"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "event"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "record_type": "workflow_event",
+        "owner": "fictional-taxpayer",
+        "tax_year": 2025,
+        "kind": "equity",
+        "form": "135",
+        "draft_version": "draft-1",
+        "event_date": "2025-10-01",
+        "observed_at": "2026-11-19",
+        "reference": "fictional-dividend-broker",
+        "provenance": "verified_source",
+        "details": {
+          "event_type": "dividend",
+          "plan_type": "RSU",
+          "employer": "fictional-employer-a",
+          "administrator": "fictional-plan-admin",
+          "broker": "fictional-broker",
+          "trustee": "fictional-Israeli-trustee",
+          "plan_id": "fictional-plan",
+          "account": "fictional-broker-account",
+          "security": "fictional-share",
+          "quantity": "10",
+          "gross": {
+            "value_state": "known",
+            "currency": "USD",
+            "tax_year": 2025,
+            "amount": "100"
+          },
+          "withholding": {
+            "value_state": "known",
+            "currency": "USD",
+            "tax_year": 2025,
+            "amount": "25"
+          },
+          "payroll_component": {
+            "value_state": "known",
+            "currency": "ILS",
+            "tax_year": 2025,
+            "amount": "0"
+          },
+          "adjusted_basis": {
+            "value_state": "unknown",
+            "currency": "USD",
+            "tax_year": 2025
+          },
+          "payroll_item": null,
+          "destination": null,
+          "from_account": null,
+          "to_account": null
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"account\": \"fictional-broker-account\", \"adjusted_basis\": {\"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"unknown\"}, \"administrator\": \"fictional-plan-admin\", \"broker\": \"fictional-broker\", \"destination\": null, \"employer\": \"fictional-employer-a\", \"event_type\": \"dividend\", \"from_account\": null, \"gross\": {\"amount\": \"100\", \"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"payroll_component\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"payroll_item\": null, \"plan_id\": \"fictional-plan\", \"plan_type\": \"RSU\", \"quantity\": \"10\", \"security\": \"fictional-share\", \"to_account\": null, \"trustee\": \"fictional-Israeli-trustee\", \"withholding\": {\"amount\": \"25\", \"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"known\"}}, \"draft_version\": \"draft-1\", \"event_date\": \"2025-10-01\", \"form\": \"135\", \"kind\": \"equity\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-dividend-broker\", \"tax_year\": 2025}",
+          "sha256": "59ab8a513a4299c020be0f37b702affa5bb3b7543b80786d18704bd76053c299",
+          "page": 1,
+          "field": "reviewed synthetic fields"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "event"
+          ],
+          "method": "manual"
+        }
+      },
+      {
+        "record_type": "workflow_event",
+        "owner": "fictional-taxpayer",
+        "tax_year": 2025,
+        "kind": "equity",
+        "form": "135",
+        "draft_version": "draft-1",
+        "event_date": "2025-10-01",
+        "observed_at": "2026-11-19",
+        "reference": "fictional-dividend-trustee",
+        "provenance": "verified_source",
+        "details": {
+          "event_type": "dividend",
+          "plan_type": "RSU",
+          "employer": "fictional-employer-a",
+          "administrator": "fictional-plan-admin",
+          "broker": "fictional-broker",
+          "trustee": "fictional-Israeli-trustee",
+          "plan_id": "fictional-plan",
+          "account": "fictional-trustee-account",
+          "security": "fictional-share",
+          "quantity": "10",
+          "gross": {
+            "value_state": "known",
+            "currency": "USD",
+            "tax_year": 2025,
+            "amount": "100"
+          },
+          "withholding": {
+            "value_state": "known",
+            "currency": "USD",
+            "tax_year": 2025,
+            "amount": "25"
+          },
+          "payroll_component": {
+            "value_state": "known",
+            "currency": "ILS",
+            "tax_year": 2025,
+            "amount": "0"
+          },
+          "adjusted_basis": {
+            "value_state": "unknown",
+            "currency": "USD",
+            "tax_year": 2025
+          },
+          "payroll_item": null,
+          "destination": null,
+          "from_account": null,
+          "to_account": null
+        },
+        "source": {
+          "text": "SYNTHETIC ONLY; independently reviewed fictional record; {\"details\": {\"account\": \"fictional-trustee-account\", \"adjusted_basis\": {\"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"unknown\"}, \"administrator\": \"fictional-plan-admin\", \"broker\": \"fictional-broker\", \"destination\": null, \"employer\": \"fictional-employer-a\", \"event_type\": \"dividend\", \"from_account\": null, \"gross\": {\"amount\": \"100\", \"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"payroll_component\": {\"amount\": \"0\", \"currency\": \"ILS\", \"tax_year\": 2025, \"value_state\": \"known\"}, \"payroll_item\": null, \"plan_id\": \"fictional-plan\", \"plan_type\": \"RSU\", \"quantity\": \"10\", \"security\": \"fictional-share\", \"to_account\": null, \"trustee\": \"fictional-Israeli-trustee\", \"withholding\": {\"amount\": \"25\", \"currency\": \"USD\", \"tax_year\": 2025, \"value_state\": \"known\"}}, \"draft_version\": \"draft-1\", \"event_date\": \"2025-10-01\", \"form\": \"135\", \"kind\": \"equity\", \"observed_at\": \"2026-11-19\", \"owner\": \"fictional-taxpayer\", \"provenance\": \"verified_source\", \"record_type\": \"workflow_event\", \"reference\": \"fictional-dividend-trustee\", \"tax_year\": 2025}",
+          "sha256": "7e716ff5d1b193ffb9adbb006e525c35fd9443ebf71174666098209450a04aa8",
+          "page": 1,
+          "field": "reviewed synthetic fields"
+        },
+        "review": {
+          "reviewer": "synthetic-fixture-author",
+          "owner_year_checked": true,
+          "fields_checked": [
+            "event"
+          ],
+          "method": "manual"
+        }
+      }
+    ]
+  },
+  "phase4": {
+    "synthetic": true,
+    "owner": "fictional-taxpayer",
+    "tax_year": 2025,
+    "purpose": "annual-employer-certificate",
+    "text_lines": [
+      "SYNTHETIC ONLY - fictional-taxpayer - 2025",
+      "Taxable wages ILS 80000",
+      "Tax withheld ILS 8000",
+      "Adjustment ILS -450",
+      "Blank field below:"
+    ],
+    "hebrew_labels": [
+      "בדיקה סינתטית בלבד",
+      "שכר חייב במס",
+      "מס שנוכה",
+      "הפרש שלילי",
+      "תא ריק"
+    ],
+    "scan_cells": [
+      "2025",
+      "80000",
+      "8000",
+      "-450",
+      null
+    ],
+    "fields": {
+      "wages": "80000",
+      "withholding": "8000",
+      "adjustment": "-450",
+      "empty": {
+        "value_state": "blank"
+      }
+    }
+  }
+}

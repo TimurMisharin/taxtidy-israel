@@ -1,0 +1,17 @@
+{
+  "case_id": null,
+  "expected_revision": null,
+  "document_id": null,
+  "report_sha256": null,
+  "review": {
+    "reviewer": null,
+    "reviewed_at": null,
+    "owner": null,
+    "tax_year": null,
+    "purpose": null,
+    "content_matches": false,
+    "pages_visual_checked": [],
+    "fields": [],
+    "recipient_version": "unconfirmed"
+  }
+}
