@@ -44,4 +44,4 @@ For current-year work collect each payer, actual gross/withholding to date, rema
 
 ## Setup and release evidence
 
-See [setup](../../SETUP.md), [verification and limits](../../VERIFICATION.md), and the [synthetic demonstration](../../DEMO.md). Importing this skill does not install Python, OCR, a connector or a browser session. Host installation remains pending; use only capabilities actually available.
+See [setup](../../SETUP.md), [verification and limits](../../VERIFICATION.md), and the [synthetic demonstration](../../DEMO.md). Importing this skill does not install Python, OCR, a connector or a browser session. The repository marketplace installs this existing plugin; see setup for registration and first-use instructions. Host discovery/installation is a separate unverified boundary; use only capabilities actually available.

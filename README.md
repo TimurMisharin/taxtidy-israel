@@ -8,7 +8,7 @@
 
 A ChatGPT plugin for organizing Israeli tax documents, finding missing information, and preparing **narrowly supported 2025 tax refund or balance-due estimates**. Hebrew is the default language, with multilingual tax assistance, including Russian and Arabic.
 
-**Version 0.1.0 · Open source under AGPL-3.0-only**
+**Version 0.1.1 · Open source under AGPL-3.0-only**
 
 ## Who it helps
 
@@ -22,14 +22,36 @@ People checking Israeli employment income and related tax records who want a cle
 
 **OCR** means recognizing text in scanned images. Hebrew OCR can misread years, minus signs and blank fields, so a person must compare the original document with the extracted information before it is used.
 
-## Get started
+## Install from this repository
 
-1. Read the [setup guide](taxtidy-israel/SETUP.md). The plugin instructions and local Python/OCR runtime are separate: importing a plugin does not install its runtime or connect accounts.
-2. Obtain the portable plugin ZIP and checksum from [release v0.1.0](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.0). GitHub's automatic source ZIP contains the development repository and is a different download.
-3. Use a ChatGPT environment that supports this package format and, for executable utilities, the required local runtime. **Host installation/import/discovery has not been tested.** Follow your host's verified instructions; this repository does not establish that a particular import method works.
-4. Start with: “Help me check my 2025 Israeli tax documents. Explain what is missing before estimating a refund.” Keep local cases outside the entire source checkout. Never post taxpayer records or credentials in GitHub issues or PRs.
+Add this repository as a **plugin marketplace**, then install **TaxTidy Israel** from that marketplace:
 
-A host without local execution can use the guidance and templates, but cannot claim to have run Python or OCR. No mailbox, bank or Tax Authority account access is bundled.
+```text
+https://github.com/TimurMisharin/taxtidy-israel
+```
+
+For the **ChatGPT desktop app**, if your Plugins screen offers adding a repository marketplace, use that URL. The documented command-line registration route requires the **Codex CLI**:
+
+```sh
+codex plugin marketplace add TimurMisharin/taxtidy-israel
+```
+
+Then restart the ChatGPT desktop app, open **Plugins**, choose the **TaxTidy Israel** marketplace, open **TaxTidy Israel**, and install it. This installs the existing repository plugin. You do not need to create a new plugin or upload the ZIP. Repository marketplaces depend on the host; this is not an installation route for every personal ChatGPT web account. See [setup](taxtidy-israel/SETUP.md) for the separate workspace-admin GitHub import route and [OpenAI's marketplace guide](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli).
+
+## Use it in a new chat
+
+1. Start a **new chat** after installation.
+2. Type **@**, search for **TaxTidy Israel**, and select the installed plugin.
+3. Send this first message (change the language as desired):
+
+> Help me review my Israeli taxes for 2025. Answer in English. Ask about my situation and give me a document checklist first. Explain what is missing before estimating a refund.
+
+4. Provide the requested documents in that private conversation, such as **Form 106 (טופס 106)** from each employer. Review extracted figures against the originals and resolve missing or conflicting information.
+5. Ask: “What can you estimate from the reviewed information, what remains unsupported, and what should I do next?”
+
+The plugin gives guidance, checklists and explanations. Executing its bundled calculator or OCR requires a separately prepared Python/OCR runtime; installation does not install those dependencies or connect accounts. A host without execution can use the guidance but must not claim to have run the utilities. Keep local cases outside the entire checkout and never post taxpayer records or credentials in GitHub issues or PRs.
+
+**Verification:** package/catalog checks are separate from actual host installation, which remains unverified until a successful marketplace install is observed. The [v0.1.1 ZIP and checksum](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.1) are optional portable release assets, not the marketplace installation step.
 
 ## What happens next
 

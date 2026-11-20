@@ -1,0 +1,15 @@
+{
+  "name": "taxtidy-israel",
+  "interface": {
+    "displayName": "TaxTidy Israel"
+  },
+  "plugins": [
+    {
+      "name": "taxtidy-israel",
+      "source": {
+        "source": "local",
+        "path": "./taxtidy-israel"
+      }
+    }
+  ]
+}

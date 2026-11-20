@@ -1,14 +1,50 @@
-# TaxTidy Israel 0.1.0 setup
+# TaxTidy Israel 0.1.1 setup
 
-TaxTidy Israel is a ChatGPT plugin supplied as a portable skill package. Host installation and discovery are pending; no account plugin was created. Importing instructions does not install Python, OCR, mail access or browser access. Repository publication is not evidence of successful installation in ChatGPT.
+Install the existing TaxTidy Israel plugin from its GitHub repository marketplace. You do not need to create another plugin or upload a ZIP to Plugin Creator.
 
-Original project materials are [AGPL-3.0-only](LICENSE), allowing commercial use subject to the license's source-sharing and notice obligations. [Third-party notices](THIRD_PARTY_NOTICES.md) explain separately licensed dependencies; no commercial PyMuPDF license is supplied.
+Original project materials are [AGPL-3.0-only](LICENSE), allowing commercial use subject to the license's source-sharing and notice obligations. [Third-party notices](THIRD_PARTY_NOTICES.md) cover separately licensed dependencies.
 
-## Choose a deployment path
+## Add the repository marketplace and install
 
-- Plain skill: retain this package tree and select `skills/taxtidy-israel/SKILL.md` using a host that supports local skills. Keep the root handoff documents with it so its relative links resolve. The exact installation location depends on the host; no host discovery has been tested for this release.
-- Private plugin: where the host supports this portable manifest, import the archive containing one `taxtidy-israel/` root. This is a prepared package, not a claim that a particular host accepts it. Follow that host's current private-import instructions; no publication is needed.
-- Manual use: read the skill and references, collect documents locally, and run the utility in a prepared runtime. A host without local execution can provide collection and research guidance only.
+Repository URL:
+
+```text
+https://github.com/TimurMisharin/taxtidy-israel
+```
+
+### ChatGPT desktop app
+
+If your Plugins screen offers adding a repository marketplace, enter the URL above. Menu wording and availability depend on your host; no specific add-repository button has been verified for this release.
+
+The documented registration route below requires the **Codex CLI already installed**. Run it once in a terminal:
+
+```sh
+codex plugin marketplace add TimurMisharin/taxtidy-israel
+```
+
+Restart the ChatGPT desktop app. Open **Plugins**, select the **TaxTidy Israel** marketplace, open the **TaxTidy Israel** plugin and install it. See [OpenAI's repository marketplace instructions](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli).
+
+If the marketplace or plugin does not appear, stop and check the registration result, host support and workspace policy. Do not create a replacement plugin. This distribution is a repository marketplace, not a listing in OpenAI's universal public catalog. It is not available through every personal ChatGPT web account.
+
+### Workspace-admin GitHub import (separate option)
+
+This route requires a workspace administrator. In ChatGPT, open **Admin > Plugins > Add > Import marketplace**. Set **Source** to the repository URL above, leave **Path** empty, and leave the branch field empty for the default branch (`main`) or enter `main`. Import, review results and make TaxTidy Israel available for installation. Members then install it from their workspace's Plugins directory. Follow [OpenAI's GitHub import guide](https://learn.chatgpt.com/docs/enterprise/plugin-management) for GitHub authorization and workspace access requirements.
+
+### Start your first conversation
+
+1. Start a **new chat** after installation.
+2. Type **@**, search for **TaxTidy Israel** and select the installed plugin.
+3. Send:
+
+> Help me review my Israeli taxes for 2025. Answer in English. Ask about my situation and give me a document checklist first. Explain what is missing before estimating a refund.
+
+Change the answer language as needed; Hebrew is the default. Supply requested documents privately, including Form 106 from each employer where relevant. Compare extracted figures with originals and clarify missing or conflicting information. Then ask for a supported estimate, its assumptions, unresolved questions and next steps. No return is filed automatically.
+
+### Guidance versus execution
+
+Installation provides the skill, references, templates and bundled scripts. It does not install Python/OCR dependencies, connect accounts or grant file access. A host without execution can provide guidance and document checklists, but must not claim that it ran the local calculator or OCR. For those utilities, prepare the runtime below. Host discovery/installation and the full conversational workflow have not yet been verified for this release; package checks alone do not prove them. The [demo](DEMO.md) is a synthetic local-utility demonstration, not a host installation recording.
+
+Portable ZIP/checksum release assets are an optional separate distribution, not required for the repository-marketplace route. GitHub's automatic source archive is the development repository. Keep the package's license and notices with any standalone copy.
 
 ## Local runtime
 

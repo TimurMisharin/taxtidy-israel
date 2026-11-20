@@ -2,6 +2,8 @@
 
 TaxTidy Israel is a ChatGPT plugin. `taxtidy-israel/` is the portable distributable; `tools/` and `tests/` are development material, not additional account integrations. Root READMEs and `assets/overview.svg` introduce the project. The plugin ZIP is built separately and distributed with a SHA-256 checksum through GitHub Releases.
 
+The repository marketplace index is `.agents/plugins/marketplace.json`. Its one local source is `./taxtidy-israel`, resolved from the repository root. It is outside the portable ZIP. Check catalog/source identity and host discovery separately from package/runtime tests.
+
 ## Existing environment
 
 See [setup](taxtidy-israel/SETUP.md) for the validated Python 3.12.14/POSIX runtime and separately installed OCR prerequisites. `requirements-dev.txt` lists direct development dependencies; `requirements-dev.lock` records the validated environment. No environment or binary dependency is included. Preparing a new machine or discovering the plugin in ChatGPT has not been tested by this publication.
@@ -19,7 +21,7 @@ python3 -m ruff check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m ruff format --check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m unittest discover -v -s tests -t .
 python3 tools/package_skill.py build
-python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.0.zip
+python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.1.zip
 ```
 
 The packager explicitly allowlists the deliverable. Git ignore rules do not determine ZIP contents. Review both inventories when adding resources; preserve the license and notices in the standalone package. Keep private evidence and generated files out of commits, and stage reviewed paths explicitly.

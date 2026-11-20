@@ -13,3 +13,7 @@ Known limits retained: raw OCR reads2005 where the Hebrew source visibly shows20
 The unchanged Python dependency audit is reused only after equality verification; no new advisory query is implied. Native OCR/models have separate provenance. No dependency binaries, OCR models, test fonts, private cases or ephemeral signing keys are packaged.
 
 The standalone package includes the project [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md). Publication changes add documentation and licensing; numerical rules and runtime behavior remain unchanged. Host installation and live account integration remain untested.
+
+## Marketplace metadata and setup — 0.1.1
+
+Version 0.1.1 adds repository-marketplace installation instructions and a shorter listing subtitle. The repository catalog points to this existing plugin directory; no account-upload creation is required. This catalog is outside the portable ZIP. Runtime code, numerical rules, fixtures, dependency pins and numerical coverage are unchanged. Local catalog/package validation is separate from host discovery, installation and conversational execution, which remain unverified. No new runtime regression suite or fresh dependency advisory audit is claimed.

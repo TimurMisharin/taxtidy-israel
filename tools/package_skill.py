@@ -89,7 +89,7 @@ def check(root):
         or manifest.get("$schema")
         != "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
         or manifest.get("name") != "taxtidy-israel"
-        or manifest.get("version") != "0.1.0"
+        or manifest.get("version") != "0.1.1"
         or manifest.get("description") != DESCRIPTION
     ):
         raise ValueError("invalid_manifest")
@@ -98,7 +98,7 @@ def check(root):
     interface = manifest["extensions"]["com.openai"]["interface"]
     if interface != {
         "displayName": "TaxTidy Israel",
-        "shortDescription": DESCRIPTION,
+        "shortDescription": "Israeli tax document guidance",
         "capabilities": [],
     }:
         raise ValueError("invalid_interface")
@@ -251,7 +251,7 @@ def main():
             check_archive(args.archive)
         else:
             output = (
-                args.archive or DEFAULT_ROOT.parent / "dist/taxtidy-israel-0.1.0.zip"
+                args.archive or DEFAULT_ROOT.parent / "dist/taxtidy-israel-0.1.1.zip"
             )
             digest = build(args.root, output)
             checksum = output.with_suffix(".sha256")
