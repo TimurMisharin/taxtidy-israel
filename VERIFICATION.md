@@ -1,16 +1,22 @@
 # Verification and limitations
 
-TaxTidy Israel 0.1.0 is a ChatGPT plugin with separately required local Python/OCR execution. This page records the locally verified publication candidate. Remote repository, main-protection and release checks occur after upload and are reported in the release/handoff; host installation remains untested.
+TaxTidy Israel 0.1.1 is a ChatGPT plugin with separately required local Python/OCR execution. This page records the locally verified publication candidate. Remote repository, main-protection and release checks occur after upload and are reported in the release/handoff; host installation remains untested.
 
-## Fresh publication-candidate checks — 2026-11-20
+## Historical publication-candidate checks — 0.1.0, 2026-11-20
 
 Compilation, portable-package and skill validation, Ruff lint/format, all 66 existing tests and the separate nine-case acceptance report passed. No new runtime regression tests were added. Runtime code, numerical rules, fixtures and dependency pins are unchanged. The package now carries its license and third-party notices: 26 source-identical entries, with deterministic build and SHA-256 verification.
 
-Portable ZIP SHA-256: `3eae0e6f7cbe58b51ac4b5d6e3a7910175cfadb792e56dc24fd586ef04e87229`. The release sidecar covers the downloadable ZIP; GitHub-generated source archives are different files.
+Historical 0.1.0 portable ZIP SHA-256: `3eae0e6f7cbe58b51ac4b5d6e3a7910175cfadb792e56dc24fd586ef04e87229`. The release sidecar covers the downloadable ZIP; GitHub-generated source archives are different files.
 
 All 62 installed/locked/recorded/audited distribution versions, Python identity, six native/model/font assets and the Tesseract version matched retained evidence. The audit is reused, not a fresh advisory query; it records zero known vulnerabilities for that retained snapshot. Licenses and upstream boundaries were reviewed separately.
 
 Local document links, four-way language navigation, original SVG and publication inventory are checked before commit. Hebrew/Arabic RTL and mobile previews were inspected locally; final GitHub rendering is checked after upload. Main official service pages were readable through the web tool; several deeper official PDF/index URLs blocked automated retrieval, timed out or returned no readable content. Those references remain dated research pointers, not newly revalidated rules.
+
+## Repository marketplace update — 0.1.1
+
+The repository now includes `.agents/plugins/marketplace.json`, pointing to the existing `taxtidy-israel/` plugin. Installation and first-use instructions are in [setup](taxtidy-israel/SETUP.md). The listing subtitle and patch version changed; runtime, numerical rules, fixtures and dependencies did not. No new runtime regression suite was added.
+
+On 2026-11-20, compilation of the packaging tool, package and skill validation, Ruff lint/format, all five existing delivery tests, exact catalog/source checks, contained document links and deterministic 26-entry archive/source comparisons passed. No tax/OCR regression suite was rerun for this metadata/docs change. Current portable ZIP SHA-256: `c67de6711d30b1c690ca91c55b46f43b75255b6894505e384f2b968af66ebe12`. Actual host discovery/installation and the full installed-plugin conversation remain unverified; local catalog/package checks do not establish those outcomes. The old release and its checksum above remain historical, unchanged evidence.
 
 ## Retained development evidence
 
