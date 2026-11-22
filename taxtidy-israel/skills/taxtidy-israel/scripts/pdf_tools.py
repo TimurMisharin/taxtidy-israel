@@ -1,6 +1,5 @@
 """Local bounded PDF processing. No signature trust or portal acceptance is inferred."""
 
-import getpass
 import hashlib
 import io
 import logging
@@ -11,16 +10,19 @@ import shutil
 import signal
 import stat
 import subprocess
-import sys
 import time
 import uuid
-import warnings
 from pathlib import Path
 
 import case
 import pymupdf
 from pypdf import PdfReader, PdfWriter
 from pypdf.errors import PyPdfError
+
+if Path(__file__).with_name("pdf_password.py").is_file():
+    from pdf_password import hidden_password
+else:
+    hidden_password = None
 
 MAX_FILE = 50 * 1024 * 1024
 MAX_PAGES = 100
@@ -49,16 +51,6 @@ def file_bytes(path, limit=MAX_FILE):
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
-
-
-def hidden_password():
-    case.require(sys.stdin.isatty(), "concealed_input_unavailable")
-    with warnings.catch_warnings():
-        warnings.simplefilter("error", getpass.GetPassWarning)
-        try:
-            return getpass.getpass("Document password (local concealed input): ")
-        except (getpass.GetPassWarning, EOFError, KeyboardInterrupt):
-            raise case.CaseError("concealed_input_unavailable") from None
 
 
 def private_write(path, data):
@@ -122,6 +114,7 @@ def _process(folder, connection, options):
     encrypted = doc.needs_pass
     password = None
     if encrypted:
+        case.require(options["allow_encrypted"], "encrypted_pdf_unsupported")
         connection.send({"need": "document_password"})
         password = connection.recv()
         case.require(
@@ -132,6 +125,7 @@ def _process(folder, connection, options):
     case.require(0 < len(doc) <= MAX_PAGES, "pdf_page_limit")
     reader = PdfReader(io.BytesIO(original), strict=True)
     if reader.is_encrypted:
+        case.require(options["allow_encrypted"], "encrypted_pdf_unsupported")
         case.require(reader.decrypt(password or ""), "incorrect_pdf_password")
     signed = signature_count(reader)
     pages = []
@@ -298,6 +292,11 @@ def process_one(
     options,
     password_provider=hidden_password,
 ):
+    options = {
+        **options,
+        "allow_encrypted": hidden_password is not None
+        and password_provider is not None,
+    }
     document_id = uuid.uuid4().hex
     with case.document_directory(root, create=True) as parent:
         folder = parent / document_id
@@ -339,6 +338,14 @@ def process_one(
                 os.killpg(worker.pid, signal.SIGKILL)
                 worker.join()
             connection.close()
+        if report["reason"] == "encrypted_pdf_unsupported":
+            (folder / "original.pdf").unlink()
+            folder.rmdir()
+            return {
+                **report,
+                "display_filename": display_name,
+                "attachment_ready": False,
+            }
         if report["status"] == "failed":
             for path in folder.iterdir():
                 if path.name != "original.pdf":
@@ -420,7 +427,8 @@ def process(
         report = process_one(
             root, data, path.name, owner, tax_year, purpose, options, password_provider
         )
-        state = case.register_document(root, state, report)
+        if "document_id" in report:
+            state = case.register_document(root, state, report)
         reports.append(report)
     return {
         "ok": all(r["status"] != "failed" for r in reports),

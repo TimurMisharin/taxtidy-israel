@@ -1,0 +1,34 @@
+{
+  "version": "0.1.4",
+  "author": {
+    "name": "Timur Misharin"
+  },
+  "interface": {
+    "shortDescription": "Israeli tax document review",
+    "developerName": "Timur Misharin",
+    "category": "Finance",
+    "websiteURL": "https://github.com/TimurMisharin/taxtidy-israel",
+    "supportURL": "https://github.com/TimurMisharin/taxtidy-israel/issues",
+    "privacyPolicyURL": "https://github.com/TimurMisharin/taxtidy-israel/blob/main/PRIVACY.md",
+    "logo": "./assets/icon.png",
+    "composerIcon": "./assets/icon.png",
+    "defaultPrompt": [
+      "What documents should I gather to review my 2025 Israeli taxes?",
+      "How do I compare Form 106 with year-end payslips without double-counting wages?",
+      "What should I check before counting a Section 46 donation?"
+    ]
+  },
+  "review": {
+    "commerce": false,
+    "prompts": [
+      "I worked for two employers in Israel in 2025. In English, explain what to collect from each employer and what each document proves.",
+      "Using fictional figures, show how to reconcile a final Form 106 with cumulative payslips without adding the same wages twice.",
+      "My fictional donation receipt and payslip both mention the same Section 46 donation. What should I check before treating it as additional relief?",
+      "I have a saved 2025 tax return draft and no acknowledgment. What does this tell me about filing status?",
+      "I have an unredacted Form 106 and it contains an Israeli ID number. What should I share for a wage reconciliation?"
+    ]
+  },
+  "publication": {
+    "release_notes": "Adds a redacted-input workflow, a directory listing and starter prompts. The public skill covers document checklists, evidence reconciliation and illustrative estimates for supported 2025 cases."
+  }
+}
