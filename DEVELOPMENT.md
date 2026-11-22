@@ -26,6 +26,19 @@ python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.3.zip
 
 The packager explicitly allowlists the deliverable. Git ignore rules do not determine ZIP contents. Review both inventories when adding resources; preserve the license and notices in the standalone package. Keep private evidence and generated files out of commits, and stage reviewed paths explicitly.
 
+## OpenAI directory submission
+
+Build and check the separate skills-only ZIP from the release source:
+
+```sh
+python3 tools/package_skill.py build-public dist/taxtidy-israel-0.1.4-openai.zip
+python3 tools/package_skill.py check-public-archive dist/taxtidy-israel-0.1.4-openai.zip
+```
+
+Edit [listing and review metadata](submission/metadata.json) for directory releases. The [public skill scope](submission/public-use.md) and [privacy notice](PRIVACY.md) describe redacted inputs, manual handling of authenticated accounts and optional private local execution. The public package rejects encrypted PDFs and omits the terminal password helper. The calculator still covers only supported 2025 cases.
+
+Confirm the verified developer name and intended country availability in the portal. If the privacy notice changes, publish the revised text and update `interface.privacyPolicyURL` to match. Portal validation, skill scans and attestations are separate from local archive checks.
+
 ## Branches and releases
 
 Use topic branches and fork-based pull requests to `main`; only the owner merges. The intended policy blocks direct updates, force pushes and deletion of `main`, with an owner-admin exception for PR merges only. The owner-only boundary depends on retaining the owner as the sole eligible administrator; granting another eligible admin changes it. See the final publication handoff for verified remote settings. No CI status is implied by these local commands.

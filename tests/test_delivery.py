@@ -5,11 +5,15 @@ import io
 import json
 import shutil
 import stat
+import subprocess
+import sys
 import unittest
 import zipfile
 from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
+
+from pypdf import PdfWriter
 
 from tests.support import ROOT, temporary
 
@@ -21,6 +25,73 @@ spec.loader.exec_module(package)
 
 
 class DeliveryTests(unittest.TestCase):
+    def test_public_archive_rejects_encrypted_pdfs_without_retaining_them(self):
+        with temporary() as parent:
+            parent = Path(parent)
+            archive = parent / "openai.zip"
+            package.build_public(ROOT / "taxtidy-israel", archive)
+            with zipfile.ZipFile(archive) as built:
+                self.assertNotIn(
+                    "taxtidy-israel/" + package.PASSWORD_HELPER, built.namelist()
+                )
+                built.extractall(parent)
+            script = parent / "taxtidy-israel/skills/taxtidy-israel/scripts/taxtidy.py"
+            root = parent / "case"
+            initialized = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "init",
+                    "--case-root",
+                    str(root),
+                    "--taxpayer-id",
+                    "person-a",
+                    "--years",
+                    "2025",
+                    "--synthetic",
+                ],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            revision = json.loads(initialized.stdout)["revision"]
+            source = parent / "fixture.pdf"
+            for password in ("fixture-only", ""):
+                with self.subTest(empty_password=not password):
+                    writer = PdfWriter()
+                    writer.add_blank_page(width=72, height=72)
+                    writer.encrypt(password)
+                    writer.write(source)
+                    result = subprocess.run(
+                        [
+                            sys.executable,
+                            str(script),
+                            "pdf",
+                            "--case-root",
+                            str(root),
+                            "--input",
+                            str(source),
+                            "--owner",
+                            "person-a",
+                            "--tax-year",
+                            "2025",
+                            "--purpose",
+                            "synthetic-test",
+                            "--authorized",
+                        ],
+                        capture_output=True,
+                        text=True,
+                        check=False,
+                        timeout=15,
+                    )
+                    self.assertEqual(result.returncode, 1, result.stderr)
+                    response = json.loads(result.stdout)
+                    self.assertEqual(response["revision"], revision)
+                    self.assertEqual(
+                        response["documents"][0]["reason"], "encrypted_pdf_unsupported"
+                    )
+                    self.assertEqual(list((root / "documents").iterdir()), [])
+
     def test_deterministic_archive_and_unsafe_entries(self):
         with temporary() as parent:
             parent = Path(parent)
