@@ -4,7 +4,11 @@
 
 TaxTidy Israel is an open-source ChatGPT plugin for reviewing Israeli tax records. It helps you choose a route for each year, reconcile salary and withholding, check Section 46 donations, and identify the evidence needed to confirm a filing. The bundled calculator supports a limited set of **2025** cases.
 
-**Version 0.1.2** · [GitHub release and checksum](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.2) · [AGPL-3.0-only](LICENSE)
+**Version 0.1.3** · [GitHub release and checksum](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.3) · [AGPL-3.0-only](LICENSE)
+
+**Before installing.** TaxTidy Israel does not replace tax, legal, financial, accounting, or other professional advice. It is provided as is. Liability for financial or other losses is limited to the extent permitted by applicable law. [Legal notice and limitation of liability](taxtidy-israel/LICENSE-NOTICE.md)
+
+Choosing to install or activate the plugin on any platform after the notice has been made available in advance constitutes acceptance of its terms, subject to applicable law. Installation or activation alone creates no entitlement to support, maintenance, updates, or professional services.
 
 ## Install by platform
 

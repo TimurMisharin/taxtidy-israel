@@ -1,4 +1,6 @@
-# TaxTidy Israel 0.1.2 setup
+# TaxTidy Israel 0.1.3 setup
+
+**Before installing.** Choosing to install or activate TaxTidy Israel on any platform after the legal notice has been made available in advance constitutes acceptance to the extent permitted by law. Installation or activation alone creates no obligation to provide support, maintenance, updates, or professional services. TaxTidy Israel is a general-purpose aid provided as is. It does not replace tax, legal, financial, accounting, or other professional advice. [Legal notice and limitation of liability](LICENSE-NOTICE.md)
 
 Install the existing TaxTidy Israel plugin from its GitHub repository marketplace. You do not need to create another plugin or upload a ZIP to Plugin Creator.
 
