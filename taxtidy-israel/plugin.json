@@ -1,13 +1,15 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "taxtidy-israel",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Find your tax documents, estimate your refund or balance due, and see what still needs filing.",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "TaxTidy Israel",
-        "shortDescription": "Israeli tax document guidance",
+        "shortDescription": "כלי עזר בלבד • אינו ייעוץ מס",
+        "longDescription": "הודעה לפני התקנה: בחירה בהתקנה או בהפעלה של התוסף בכל פלטפורמה, לאחר שההודעה הועמדה לעיון מראש, מהווה הסכמה לתנאיה, בכפוף לדין החל. ההתקנה או ההפעלה כשלעצמן אינן מחייבות את המפתחים לספק תמיכה, תחזוקה, עדכונים או שירות מקצועי. TaxTidy Israel הוא כלי עזר כללי בלבד. הוא אינו תחליף לייעוץ מס, ייעוץ משפטי, פיננסי, חשבונאי או כל ייעוץ מקצועי אחר. התוסף מסופק כמות שהוא, ללא אחריות, ככל שהדין החל מתיר זאת. בכפוף לדין החל, המפתחים והמפיצים לא יישאו באחריות לנזק כספי או אחר הנובע משימוש בתוסף או מהסתמכות על תוצריו. זכויות ואחריות שלא ניתן לגרוע מהן לפי דין נשמרות.\n\nBefore installing: Choosing to install or activate the plugin on any platform after this notice has been made available for review in advance constitutes acceptance of its terms, subject to applicable law. Installation or activation alone does not oblige the developers to provide support, maintenance, updates, or professional services. TaxTidy Israel is a general-purpose aid for reviewing Israeli tax documents. It is not a substitute for tax, legal, financial, accounting, or other professional advice. The plugin is provided as is, without warranty, to the extent permitted by law. Subject to applicable law, its developers and distributors disclaim liability for financial or other losses arising from use of or reliance on the plugin. Mandatory rights and liabilities remain unaffected.",
+        "termsOfServiceURL": "https://github.com/TimurMisharin/taxtidy-israel/blob/main/taxtidy-israel/LICENSE-NOTICE.md",
         "capabilities": []
       }
     }

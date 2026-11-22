@@ -133,6 +133,8 @@ class DeliveryTests(unittest.TestCase):
         package.check(ROOT / "taxtidy-israel")
         for bad in (
             "schema",
+            "missing_install_notice",
+            "missing_license_notice",
             "symlink",
             "missing",
             "escape",
@@ -156,11 +158,18 @@ class DeliveryTests(unittest.TestCase):
                     ignore=shutil.ignore_patterns("__pycache__"),
                 )
                 skill = root / "skills/taxtidy-israel"
-                if bad == "schema":
+                if bad in {"schema", "missing_install_notice"}:
                     path = root / "plugin.json"
                     manifest = json.loads(path.read_text())
-                    manifest["$schema"] = "https://invalid.example/schema"
+                    if bad == "schema":
+                        manifest["$schema"] = "https://invalid.example/schema"
+                    else:
+                        del manifest["extensions"]["com.openai"]["interface"][
+                            "longDescription"
+                        ]
                     path.write_text(json.dumps(manifest))
+                elif bad == "missing_license_notice":
+                    (root / "LICENSE-NOTICE.md").unlink()
                 elif bad == "symlink":
                     (skill / "references/external.md").symlink_to(
                         ROOT / "tools/package_skill.py"

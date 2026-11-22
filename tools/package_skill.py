@@ -13,6 +13,8 @@ from pathlib import Path
 import yaml
 
 DESCRIPTION = "Find your tax documents, estimate your refund or balance due, and see what still needs filing."
+VERSION = "0.1.3"
+INSTALL_SUBTITLE = "כלי עזר בלבד • אינו ייעוץ מס"
 DEFAULT_ROOT = Path(__file__).resolve().parents[1] / "taxtidy-israel"
 
 FILES = frozenset(
@@ -21,6 +23,7 @@ FILES = frozenset(
         "SETUP.md",
         "VERIFICATION.md",
         "LICENSE",
+        "LICENSE-NOTICE.md",
         "THIRD_PARTY_NOTICES.md",
         "plugin.json",
         "skills/taxtidy-israel/SKILL.md",
@@ -89,18 +92,27 @@ def check(root):
         or manifest.get("$schema")
         != "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
         or manifest.get("name") != "taxtidy-israel"
-        or manifest.get("version") != "0.1.2"
+        or manifest.get("version") != VERSION
         or manifest.get("description") != DESCRIPTION
     ):
         raise ValueError("invalid_manifest")
     if set(manifest) != {"$schema", "name", "version", "description", "extensions"}:
         raise ValueError("unexpected_manifest_fields")
     interface = manifest["extensions"]["com.openai"]["interface"]
-    if interface != {
+    if not isinstance(interface, dict):
+        raise TypeError("invalid_interface")
+    notice = interface.get("longDescription")
+    if {k: v for k, v in interface.items() if k != "longDescription"} != {
         "displayName": "TaxTidy Israel",
-        "shortDescription": "Israeli tax document guidance",
+        "shortDescription": INSTALL_SUBTITLE,
+        "termsOfServiceURL": "https://github.com/TimurMisharin/taxtidy-israel/blob/main/taxtidy-israel/LICENSE-NOTICE.md",
         "capabilities": [],
-    }:
+    } or (
+        not isinstance(notice, str)
+        or not notice.startswith("הודעה לפני התקנה:")
+        or "Before installing:" not in notice
+        or len(notice) > 4000
+    ):
         raise ValueError("invalid_interface")
     skill = root / "skills/taxtidy-israel"
     content = (skill / "SKILL.md").read_text(encoding="utf-8")
@@ -251,7 +263,8 @@ def main():
             check_archive(args.archive)
         else:
             output = (
-                args.archive or DEFAULT_ROOT.parent / "dist/taxtidy-israel-0.1.2.zip"
+                args.archive
+                or DEFAULT_ROOT.parent / f"dist/taxtidy-israel-{VERSION}.zip"
             )
             digest = build(args.root, output)
             checksum = output.with_suffix(".sha256")
