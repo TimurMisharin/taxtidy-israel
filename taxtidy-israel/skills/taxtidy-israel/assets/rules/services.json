@@ -17,7 +17,9 @@
   "taxpayer_extensions": [],
   "tax_coordination": {
     "url": "https://www.gov.il/he/service/tax-coordination-online",
-    "verification": "unavailable_current_retrieval_HTTP403; do not infer active portal controls"
+    "observed_at": "2026-11-22",
+    "hebrew_control": "לעריכת תיאום מס",
+    "verification": "public service page only"
   },
   "source_scope": "Public service labels only, no authenticated portal inspected"
 }

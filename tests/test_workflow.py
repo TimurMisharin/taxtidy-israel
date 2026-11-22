@@ -326,6 +326,204 @@ class WorkflowTests(unittest.TestCase):
             )
             self.assertEqual(case.load(root)["authorized_search_scope"], [])
 
+    def test_new_receipt_already_in_exact_filed_total(self):
+        with temporary() as parent:
+            root, _ = annual_baseline(parent)
+            phase = fixture()["phase3"]
+            for event in (phase["ack"], phase["accepted"]):
+                result = record(root, event)
+                self.assertEqual(result.returncode, 0, result.stderr)
+            receipt = reviewed_copy(
+                fixture()["phase2"]["donations"][0], document_type="forwarded_receipt"
+            )
+            case.import_evidence(root, batch(case.load(root), [receipt]))
+
+            def finding():
+                return selected_year(json.loads(view(root).stdout))["donations"][0][
+                    "filed_returns"
+                ][0]["status"]
+
+            self.assertEqual(
+                finding(), "unresolved"
+            )  # An attachment proves delivery only.
+            proof = reviewed_copy(
+                phase["ack"],
+                kind="filed_donation",
+                reference="synthetic-field-breakdown",
+                details={
+                    "issuer": receipt["issuer"],
+                    "receipt_id": receipt["business_reference"],
+                    "status": "included",
+                    "field": "synthetic donation field",
+                    "reported_total": receipt["amount"],
+                },
+            )
+            self.assertNotEqual(record(root, proof).returncode, 0)
+            proof["review"]["fields_checked"] += ["receipt_match", "filed_calculation"]
+            wrong_version = reviewed_copy(proof, draft_version="other-draft")
+            self.assertEqual(record(root, wrong_version).returncode, 0)
+            self.assertEqual(finding(), "unresolved")
+            self.assertEqual(record(root, proof).returncode, 0)
+            self.assertEqual(finding(), "included")
+
+    def test_valid_receipt_missing_from_digital_registry_until_rechecked(self):
+        with temporary() as parent:
+            root = Path(parent) / "case"
+            state = case.initialize(root, "fictional-taxpayer", [2026], synthetic=True)
+            receipt = fixture()["phase2"]["donations"][0]
+            receipt["business_reference"] = "SYNTHETIC-RECEIPT"
+            receipt["details"]["approval_reference"] = "synthetic-approval"
+            for field in (
+                "issue_date",
+                "event_date",
+                "settlement_date",
+                "period_start",
+                "period_end",
+            ):
+                receipt[field] = (
+                    receipt[field]
+                    .replace("2025", "2026")
+                    .replace("2026-02-01", "2026-06-01")
+                )
+            for field in ("approval_from", "approval_to"):
+                receipt["details"][field] = receipt["details"][field].replace(
+                    "2025", "2026"
+                )
+            for amount in (
+                receipt["amount"],
+                receipt["withholding"],
+                receipt["details"]["payroll_applied_credit"],
+            ):
+                amount["tax_year"] = 2026
+            receipt["details"]["payroll_applied_credit"]["amount"] = "0"
+            receipt = reviewed_copy(
+                receipt, tax_year=2026, document_type="forwarded_receipt"
+            )
+            case.import_evidence(root, batch(state, [receipt]))
+            check = reviewed_copy(
+                fixture()["phase3"]["draft"],
+                kind="donation_registry",
+                form="donations",
+                draft_version="registry",
+                reference="synthetic-registry-check",
+                tax_year=2026,
+                event_date="2026-11-17",
+                observed_at="2026-11-17",
+                details={
+                    "issuer": receipt["issuer"],
+                    "receipt_id": receipt["business_reference"],
+                    "status": "missing",
+                },
+            )
+            check["review"]["fields_checked"].append("registry_entry")
+            self.assertEqual(record(root, check).returncode, 0)
+            issuer_reply = reviewed_copy(
+                check,
+                kind="inquiry",
+                details={
+                    "status": "acknowledged",
+                    "recipient": receipt["issuer"],
+                    "purpose": "Report receipt",
+                    "existing_reference": "synthetic-request",
+                    "authorization_reference": "synthetic-authorization",
+                },
+            )
+            self.assertEqual(record(root, issuer_reply).returncode, 0)
+            year = selected_year(json.loads(view(root, "resume").stdout), 2026)
+            self.assertEqual(year["donations"][0]["registry_status"], "missing")
+            self.assertEqual(
+                year["inquiry_drafts"][0]["receipt_id"], receipt["business_reference"]
+            )
+            self.assertEqual(year["inquiry_drafts"][0]["status"], "unsent_draft")
+            self.assertIsNone(year["estimate"])
+            associated = reviewed_copy(
+                check,
+                event_date="2026-11-19",
+                observed_at="2026-11-19",
+                details={**check["details"], "status": "associated"},
+            )
+            self.assertEqual(record(root, associated).returncode, 0)
+            year = selected_year(json.loads(view(root).stdout), 2026)
+            self.assertEqual(year["donations"][0]["registry_status"], "associated")
+            self.assertEqual(year["inquiry_drafts"], [])
+
+    def test_credit_already_applied_in_payroll_is_separate_from_donation(self):
+        with temporary() as parent:
+            root, _ = annual_baseline(parent)
+            receipt = fixture()["phase2"]["donations"][0]
+            case.import_evidence(root, batch(case.load(root), [receipt]))
+            original = case.calculate_case(root, 2025)["result_reference"]
+            for status in ("eligibility_verified", "certificate_issued", "applied"):
+                event = reviewed_copy(
+                    fixture()["phase3"]["draft"],
+                    kind="payroll_relief",
+                    form="coordination",
+                    draft_version="synthetic-certificate",
+                    reference="synthetic-" + status,
+                    details={
+                        "payer": "fictional-employer",
+                        "relief": "donation",
+                        "status": status,
+                    },
+                )
+                self.assertEqual(record(root, event).returncode, 0)
+            year = selected_year(json.loads(view(root).stdout))
+            donation = year["donations"][0]
+            self.assertEqual(Decimal(donation["amount"]["amount"]), Decimal(1000))
+            self.assertEqual(
+                Decimal(donation["payroll_applied_credit"]["amount"]), Decimal(350)
+            )
+            self.assertEqual(year["result_reference"], original)
+            self.assertEqual(Decimal(year["estimate"]["donation_credit"]), Decimal(350))
+            self.assertEqual(
+                {e["details"]["status"] for e in year["payroll_relief"]},
+                {
+                    "eligibility_verified",
+                    "certificate_issued",
+                    "applied",
+                },
+            )
+
+    def test_transmission_waits_for_acknowledgment_for_exact_form_and_version(self):
+        with temporary() as parent:
+            root, _ = annual_baseline(parent)
+            ack = fixture()["phase3"]["ack"]
+            transmitted = reviewed_copy(ack, details={"status": "transmitted"})
+            for event in (
+                transmitted,
+                reviewed_copy(ack, form="1301"),
+                reviewed_copy(ack, draft_version="other-draft"),
+            ):
+                self.assertEqual(record(root, event).returncode, 0)
+            year = selected_year(json.loads(view(root, "resume").stdout))
+            self.assertEqual(year["filing"]["state"], "incomplete_filing_evidence")
+            self.assertTrue(year["route"]["pending_acknowledgment"])
+            self.assertEqual(year["route"]["candidate_forms"], [])
+            self.assertIsNone(year["next_control_he"])
+            self.assertEqual(record(root, ack).returncode, 0)
+            year = selected_year(json.loads(view(root).stdout))
+            self.assertEqual(year["filing"]["state"], "filing_completed")
+            current = next(
+                r
+                for r in year["filing"]["returns"]
+                if (r["form"], r["draft_version"])
+                == (ack["form"], ack["draft_version"])
+            )
+            self.assertEqual(
+                current["acknowledgments"][0]["reference"], ack["reference"]
+            )
+            cancelled = reviewed_copy(ack, details={"status": "cancelled"})
+            self.assertEqual(record(root, cancelled).returncode, 0)
+            year = selected_year(json.loads(view(root).stdout))
+            current = next(
+                r
+                for r in year["filing"]["returns"]
+                if (r["form"], r["draft_version"])
+                == (ack["form"], ack["draft_version"])
+            )
+            self.assertEqual(current["status"], "cancelled")
+            self.assertEqual(len(current["acknowledgments"]), 1)
+
     def test_event_revision_replay_and_filing_only_freshness(self):
         with temporary() as parent:
             root, _ = annual_baseline(parent)
