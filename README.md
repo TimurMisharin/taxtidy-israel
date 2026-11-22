@@ -8,7 +8,7 @@
 
 A ChatGPT plugin for organizing Israeli tax documents, finding missing information, and preparing **narrowly supported 2025 tax refund or balance-due estimates**. Hebrew is the default language, with multilingual tax assistance, including Russian and Arabic.
 
-**Version 0.1.1 · Open source under AGPL-3.0-only**
+**Version 0.1.2 · Open source under AGPL-3.0-only**
 
 ## Who it helps
 
@@ -51,7 +51,7 @@ Then restart the ChatGPT desktop app, open **Plugins**, choose the **TaxTidy Isr
 
 The plugin gives guidance, checklists and explanations. Executing its bundled calculator or OCR requires a separately prepared Python/OCR runtime; installation does not install those dependencies or connect accounts. A host without execution can use the guidance but must not claim to have run the utilities. Keep local cases outside the entire checkout and never post taxpayer records or credentials in GitHub issues or PRs.
 
-**Verification:** package/catalog checks are separate from actual host installation, which remains unverified until a successful marketplace install is observed. The [v0.1.1 ZIP and checksum](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.1) are optional portable release assets, not the marketplace installation step.
+**Verification:** package/catalog checks are separate from actual host installation, which remains unverified until a successful marketplace install is observed. The [v0.1.2 ZIP and checksum](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.2) are optional portable release assets, not the marketplace installation step.
 
 ## What happens next
 
