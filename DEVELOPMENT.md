@@ -21,7 +21,7 @@ python3 -m ruff check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m ruff format --check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m unittest discover -v -s tests -t .
 python3 tools/package_skill.py build
-python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.1.zip
+python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.2.zip
 ```
 
 The packager explicitly allowlists the deliverable. Git ignore rules do not determine ZIP contents. Review both inventories when adding resources; preserve the license and notices in the standalone package. Keep private evidence and generated files out of commits, and stage reviewed paths explicitly.

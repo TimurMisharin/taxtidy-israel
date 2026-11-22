@@ -1,4 +1,4 @@
-# TaxTidy Israel 0.1.1 setup
+# TaxTidy Israel 0.1.2 setup
 
 Install the existing TaxTidy Israel plugin from its GitHub repository marketplace. You do not need to create another plugin or upload a ZIP to Plugin Creator.
 
@@ -29,6 +29,10 @@ If the marketplace or plugin does not appear, stop and check the registration re
 ### Workspace-admin GitHub import (separate option)
 
 This route requires a workspace administrator. In ChatGPT, open **Admin > Plugins > Add > Import marketplace**. Set **Source** to the repository URL above, leave **Path** empty, and leave the branch field empty for the default branch (`main`) or enter `main`. Import, review results and make TaxTidy Israel available for installation. Members then install it from their workspace's Plugins directory. Follow [OpenAI's GitHub import guide](https://learn.chatgpt.com/docs/enterprise/plugin-management) for GitHub authorization and workspace access requirements.
+
+### ChatGPT web and mobile
+
+Public discovery on ChatGPT web, desktop and mobile requires a separate [OpenAI plugin directory submission](https://developers.openai.com/plugins/deploy/submission), approval and publication. GitHub releases provide source and portable files. For Linux, use ChatGPT in a web browser. Consult [Plugins in ChatGPT](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt) for client, plan, workspace and region availability. The skill's guidance can be used without a local executor. Bundled calculator and OCR execution require the compatible private runtime below.
 
 ### Start your first conversation
 

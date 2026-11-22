@@ -1928,6 +1928,20 @@ def workflow_event(raw, state):
                 ),
                 "invalid_event_supersession",
             )
+            if raw["kind"] in {"donation_registry", "filed_donation", "payroll_relief"}:
+                keys = (
+                    ("payer", "relief", "status")
+                    if raw["kind"] == "payroll_relief"
+                    else ("issuer", "receipt_id")
+                )
+                require(
+                    type(raw["details"]) is dict
+                    and all(
+                        previous["details"][key] == raw["details"].get(key)
+                        for key in keys
+                    ),
+                    "invalid_event_supersession",
+                )
             require(
                 previous.get("provenance") != "verified_source"
                 or raw["provenance"] == "verified_source",
@@ -1944,10 +1958,51 @@ def workflow_event(raw, state):
                 "case_opening_requested",
                 "collection",
                 "draft_saved",
+                "validation_passed",
                 "transmitted",
                 "filing_acknowledged",
+                "cancelled",
                 "assessment_issued",
             }
+        )
+    elif kind in {"donation_registry", "filed_donation"}:
+        filed = kind == "filed_donation"
+        exact(
+            d,
+            {"issuer", "receipt_id", "status"}
+            | ({"field", "reported_total"} if filed else set()),
+        )
+        identifier(d["issuer"])
+        text(d["receipt_id"])
+        if filed:
+            require(raw["form"] in {"135", "1301"})
+            require(d["status"] in {"included", "omitted"})
+            text(d["field"])
+            d["reported_total"] = money(d["reported_total"], raw["tax_year"])
+            require(
+                d["reported_total"]["value_state"] == "known"
+                and Decimal(d["reported_total"]["amount"]) >= 0
+            )
+        else:
+            require(raw["form"] == "donations")
+            require(
+                d["status"] in {"associated", "missing", "wrong_taxpayer", "cancelled"}
+            )
+        reviewed_source(
+            raw["source"],
+            raw["review"],
+            {"event", "receipt_match", "filed_calculation"}
+            if filed
+            else {"event", "registry_entry"},
+        )
+        require(raw["provenance"] == "verified_source", "review_required")
+    elif kind == "payroll_relief":
+        exact(d, {"payer", "relief", "status"})
+        require(raw["form"] in {"coordination", "relief"})
+        identifier(d["payer"])
+        text(d["relief"])
+        require(
+            d["status"] in {"eligibility_verified", "certificate_issued", "applied"}
         )
     elif kind == "attachment":
         exact(d, {"filename", "sha256", "purpose", "status"})
@@ -2023,7 +2078,7 @@ def workflow_event(raw, state):
         exact(
             d, {"route_status", "filing_obligation", "checks", "spouse", "rules_source"}
         )
-        require(raw["form"] in {"135", "1301", "coordination", "relief"})
+        require(raw["form"] in {"135", "1301", "coordination", "relief", "correction"})
         require(d["route_status"] in {"candidate", "unresolved", "verified"})
         require(d["filing_obligation"] in {"required", "not_required", "unresolved"})
         exact(d["checks"], ROUTE_CHECKS)
@@ -2279,11 +2334,15 @@ def filing_projection(state, tax_year):
         ]
         statuses = {e["details"]["status"] for e in matching}
         status = (
-            "filing_completed"
+            "cancelled"
+            if "cancelled" in statuses
+            else "filing_completed"
             if "filing_acknowledged" in statuses
             else (
                 "transmitted_acknowledgment_unverified"
                 if "transmitted" in statuses
+                else "validated"
+                if "validation_passed" in statuses
                 else "draft"
                 if "draft_saved" in statuses
                 else "assessment_issued_filing_unverified"
@@ -2300,16 +2359,24 @@ def filing_projection(state, tax_year):
                 "status": status,
                 "observed_statuses": sorted(statuses),
                 "evidence": [digest(e) for e in matching],
+                "acknowledgments": [
+                    event_projection(e)
+                    for e in matching
+                    if e["details"]["status"] == "filing_acknowledged"
+                ],
             }
         )
     overall = "unverified"
+    active = [r for r in rows if r["status"] != "cancelled"]
     if rows:
         overall = (
-            "filing_completed"
-            if all(r["status"] == "filing_completed" for r in rows)
+            "cancelled"
+            if not active
+            else "filing_completed"
+            if all(r["status"] == "filing_completed" for r in active)
             else (
                 "draft"
-                if any(r["status"] == "draft" for r in rows)
+                if any(r["status"] in {"draft", "validated"} for r in active)
                 else "incomplete_filing_evidence"
             )
         )
@@ -2341,6 +2408,73 @@ def filing_projection(state, tax_year):
             if e["provenance"] == "user_statement"
         ],
     }
+
+
+def donation_projection(state, tax_year, filing):
+    registry = workflow_records(state, "donation_registry", tax_year)
+    filed = workflow_records(state, "filed_donation", tax_year)
+    observations = {
+        digest(o): o
+        for o in state["observations"]
+        if o["kind"] == "donation" and o["tax_year"] == tax_year
+    }
+    rows = []
+    for item in state["economic_items"]:
+        obs = observations.get(item["selected_observation"])
+        if obs is None:
+            continue
+        issuer, receipt = obs["issuer"], obs["business_reference"]
+        checks = [
+            e
+            for e in registry
+            if (e["details"]["issuer"], e["details"]["receipt_id"]) == (issuer, receipt)
+        ]
+        latest = max((e["observed_at"] for e in checks), default=None)
+        current = {e["details"]["status"] for e in checks if e["observed_at"] == latest}
+        returns = []
+        for row in filing["returns"]:
+            if row["status"] != "filing_completed":
+                continue
+            matches = [
+                e
+                for e in filed
+                if (e["form"], e["draft_version"])
+                == (row["form"], row["draft_version"])
+                and (e["details"]["issuer"], e["details"]["receipt_id"])
+                == (issuer, receipt)
+            ]
+            findings = {canonical(e["details"]) for e in matches}
+            returns.append(
+                {
+                    "form": row["form"],
+                    "draft_version": row["draft_version"],
+                    "status": matches[0]["details"]["status"]
+                    if len(findings) == 1
+                    else "unresolved",
+                    "evidence": [event_projection(e) for e in matches],
+                }
+            )
+        rows.append(
+            {
+                "issuer": issuer,
+                "receipt_id": receipt,
+                "amount": item["amount"],
+                "evidence_status": item["calculation_completeness"],
+                "payroll_applied_credit": (
+                    item["details"]["payroll_applied_credit"]
+                    if item["calculation_completeness"] == "provisional"
+                    else None
+                ),
+                "registry_status": next(iter(current))
+                if len(current) == 1
+                else "unverified"
+                if not current
+                else "unresolved",
+                "registry_evidence": [event_projection(e) for e in checks],
+                "filed_returns": returns,
+            }
+        )
+    return rows
 
 
 def equity_projection(state, tax_year):
@@ -2559,24 +2693,50 @@ def forecast_projection(state, tax_year):
     }
 
 
-def route_projection(state, tax_year, current_year):
+def route_projection(state, tax_year, current_year, filing):
     recorded = workflow_records(state, "route", tax_year, False)
     latest = max((e["event_date"] for e in recorded), default=None)
     current = [e for e in recorded if e["event_date"] == latest]
-    verified = (
+    reviewed = (
         len(current) == 1
         and current[0]["provenance"] == "verified_source"
         and current[0]["details"]["route_status"] == "verified"
     )
+    pending = any(
+        r["status"] == "transmitted_acknowledgment_unverified"
+        for r in filing["returns"]
+    )
+    prior = any(r["status"] == "filing_completed" for r in filing["returns"])
+    if tax_year == current_year:
+        candidates = ["coordination", "relief"]
+    elif tax_year > current_year or pending:
+        candidates = []
+    elif prior:
+        candidates = ["correction"]
+    else:
+        candidates = ["135", "1301"]
+    prior_unverified = (
+        reviewed
+        and not prior
+        and current[0]["details"]["checks"]["prior_filing"]
+        and tax_year < current_year
+    )
+    if prior_unverified:
+        candidates = []
+    obligation = (
+        current[0]["details"]["filing_obligation"] if reviewed else "unresolved"
+    )
+    if obligation == "required" and "135" in candidates:
+        candidates.remove("135")
+    verified = reviewed and current[0]["form"] in candidates
     return {
         "recorded": [event_projection(e) for e in recorded],
         "route_status": "verified" if verified else "unresolved",
-        "candidate_forms": ["coordination", "relief"]
-        if tax_year == current_year
-        else ["135", "1301"],
-        "filing_obligation": current[0]["details"]["filing_obligation"]
-        if verified
-        else "unresolved",
+        "candidate_forms": candidates,
+        "verified_form": current[0]["form"] if verified else None,
+        "filing_obligation": obligation,
+        "pending_acknowledgment": pending,
+        "prior_filing_unverified": prior_unverified,
         "notice": "Candidates only unless source-backed year-specific review is recorded; employment/security ownership and balance do not establish the route.",
     }
 
@@ -2651,13 +2811,15 @@ def summary_projection(fd, state, as_of):
             for c in state["conflicts"]
             if c["tax_year"] == tax_year and c["status"] == "unresolved"
         ]
+        conflict_ids = {c["economic_id"] for c in conflicts}
         requests = []
         for issuer in sorted(
             {
                 i["issuer"]
                 for i in state["economic_items"]
                 if i["tax_year"] == tax_year
-                and any(c["economic_id"] == i["id"] for c in conflicts)
+                and i["kind"] == "wages"
+                and i["id"] in conflict_ids
             }
         ):
             requests.append(
@@ -2711,15 +2873,47 @@ def summary_projection(fd, state, as_of):
             inquiries.append(
                 {
                     "status": "unsent_draft",
+                    "form": blocker["form"],
+                    "draft_version": blocker["draft_version"],
                     "exact_portal_message": d["message"],
                     "next_action": "Check existing inquiry status"
                     if d["existing_inquiry_reference"]
                     else "Draft inquiry to the tax office about the blocked proper reporting route",
                     "existing_inquiry_reference": d["existing_inquiry_reference"],
-                    "question": "The portal route is blocked. Which file classification/form permits this year's actual supported balance and filing obligation?",
+                    "question": "What is the official next step or alternative for this message, year, form and version?",
                 }
             )
         deadlines = deadline_projection(state, tax_year, as_of)
+        filing = filing_projection(state, tax_year)
+        route = route_projection(state, tax_year, as_of.year, filing)
+        donations = donation_projection(state, tax_year, filing)
+        for receipt in donations:
+            if receipt["registry_status"] in {"missing", "wrong_taxpayer"}:
+                inquiries.append(
+                    {
+                        "status": "unsent_draft",
+                        "recipient": receipt["issuer"],
+                        "receipt_id": receipt["receipt_id"],
+                        "question": "Please report this receipt or correct its taxpayer association in תרומות ישראל, and confirm the registration reference.",
+                        "next_action": "Check for an existing inquiry, then verify the registry entry after the issuer replies.",
+                    }
+                )
+        next_control = None
+        control_scope = (
+            "Use the observed portal or official instructions for the verified route."
+        )
+        if tax_year == as_of.year:
+            next_control = "לעריכת תיאום מס"
+        elif route["verified_form"] == "135" or (
+            route["verified_form"] is None and "135" in route["candidate_forms"]
+        ):
+            next_control = "להגשת הבקשה"
+        elif route["pending_acknowledgment"] or route["prior_filing_unverified"]:
+            control_scope = "Retrieve the filing acknowledgment for the exact year, form and version before starting a new submission."
+        elif "correction" in route["candidate_forms"]:
+            control_scope = "Review the exact filed version and confirm the correction procedure with the tax office if an omission is verified."
+        if next_control:
+            control_scope = "Public service entry only; route eligibility must be reviewed before submission."
         years.append(
             {
                 "tax_year": tax_year,
@@ -2729,10 +2923,15 @@ def summary_projection(fd, state, as_of):
                 "scenarios": scenarios,
                 "reasons": sorted(set(reasons)) if estimate is None else [],
                 "conflicts": conflicts,
-                "filing": filing_projection(state, tax_year),
+                "filing": filing,
                 "documents": document_projection(fd, state, tax_year),
-                "route": route_projection(state, tax_year, as_of.year),
+                "route": route,
                 "deadlines": deadlines,
+                "donations": donations,
+                "payroll_relief": [
+                    event_projection(e)
+                    for e in workflow_records(state, "payroll_relief", tax_year)
+                ],
                 "equity": equity,
                 "gross_forecast": forecast_projection(state, tax_year),
                 "can_finish_now": "Review the checked estimate and filing requirements"
@@ -2742,10 +2941,8 @@ def summary_projection(fd, state, as_of):
                 else "Reconcile listed evidence and continue independent years",
                 "next_evidence": requests,
                 "inquiry_drafts": inquiries,
-                "next_control_he": "לעריכת תיאום מס"
-                if tax_year == as_of.year
-                else "להגשת הבקשה",
-                "control_scope": "Public service entry only; route eligibility must be reviewed before submission.",
+                "next_control_he": next_control,
+                "control_scope": control_scope,
             }
         )
     years.sort(
