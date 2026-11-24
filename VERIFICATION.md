@@ -1,31 +1,41 @@
-# Verification and limitations
+# TaxTidy verification record
 
-TaxTidy Israel 0.1.1 is a ChatGPT plugin with separately required local Python/OCR execution. This page records the locally verified publication candidate. Remote repository, main-protection and release checks occur after upload and are reported in the release/handoff; host installation remains untested.
+## Cross-agent candidate 0.1.6
 
-## Historical publication-candidate checks — 0.1.0, 2026-11-20
+Verification ran on 24 November 2026 using the [reviewed main snapshot 7f167d6](https://github.com/TimurMisharin/taxtidy-israel/commit/7f167d6ae3ad4332117146d9b12e35b3d746ad09) plus the cross-agent changes. [GitHub release v0.1.5](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.5) was the latest published release. OpenAI Platform listed 0.1.5 as unpublished with review status “Needs attention.” Version 0.1.6 is a local candidate pending review, tagging and publication.
 
-Compilation, portable-package and skill validation, Ruff lint/format, all 66 existing tests and the separate nine-case acceptance report passed. No new runtime regression tests were added. Runtime code, numerical rules, fixtures and dependency pins are unchanged. The package now carries its license and third-party notices: 26 source-identical entries, with deterministic build and SHA-256 verification.
+The full suite passed all 78 tests and the separate nine-case synthetic acceptance suite passed. Compilation, Ruff lint and formatting, the package and four archive validators all passed. The macOS arm64 test environment used Python 3.12.14, Ruff 0.17.6, the pinned Python distributions and Tesseract 5.5.4 with the [verified model hashes](taxtidy-israel/SETUP.md). Two builds of every ZIP matched byte for byte, and all checksum sidecars verified.
 
-Historical 0.1.0 portable ZIP SHA-256: `3eae0e6f7cbe58b51ac4b5d6e3a7910175cfadb792e56dc24fd586ef04e87229`. The release sidecar covers the downloadable ZIP; GitHub-generated source archives are different files.
+| Candidate ZIP | Files | Compressed bytes | Uncompressed bytes | SHA-256 |
+| --- | ---: | ---: | ---: | --- |
+| `taxtidy-israel-0.1.6.zip` | 28 | 106,033 | 319,461 | `417ef4f3ed72937458d46eebd5ef5eb995593a9a5f2a59acfd0b827b71288772` |
+| `taxtidy-israel-0.1.6-openai.zip` | 27 | 114,362 | 326,024 | `be49826135f56c1b33832a0f47c8c48818769cbc628572a36a00a72f48ef745b` |
+| `taxtidy-israel-0.1.6-skill-local.zip` | 27 | 103,769 | 316,906 | `4cbd9bd35bec514f9d482b2cb8d68cceac35e9ddd3c42824f6bfee22a22da3f5` |
+| `taxtidy-israel-0.1.6-skill-hosted.zip` | 25 | 99,252 | 308,482 | `c8b290f5cdc234f90f8cbd2db6e67839e156b91b36ab491371e12493fb970e3a` |
 
-All 62 installed/locked/recorded/audited distribution versions, Python identity, six native/model/font assets and the Tesseract version matched retained evidence. The audit is reused, not a fresh advisory query; it records zero known vulnerabilities for that retained snapshot. Licenses and upstream boundaries were reviewed separately.
+### Installed artifacts and hosts
 
-Local document links, four-way language navigation, original SVG and publication inventory are checked before commit. Hebrew/Arabic RTL and mobile previews were inspected locally; final GitHub rendering is checked after upload. Main official service pages were readable through the web tool; several deeper official PDF/index URLs blocked automated retrieval, timed out or returned no readable content. Those references remain dated research pointers, not newly revalidated rules.
+Both standalone ZIPs ran from isolated extraction directories with the prepared interpreter and synthetic inputs. Using [the reviewed wage fixture](tests/fixtures/cases.json), each returned the 2025 baseline refund estimate of ILS 5,098.80, suppressed missing/conflicting figures, and reported the unsupported 2024 year. The unencrypted PDF fixture preserved the original hash and required manual review. The scanned Hebrew/English fixture produced OCR text for manual verification. Both public ZIPs rejected synthetic encrypted PDFs, including empty-password encryption, with no document retained and no revision change.
 
-## Repository marketplace update — 0.1.1
+| Host or runtime | Install route | Discovery | Reference access | Guidance | Estimate | PDF review | OCR | Resume |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Python 3.12.14 on macOS arm64 | Isolated local and hosted standalone ZIPs | Not applicable | Pass, archive links | Not tested | Pass | Pass | Pass | Pass |
+| Codex CLI 0.171.0-alpha.13.2 | Extracted local standalone in `.agents/skills/` | Pass | Pass, installed file | Not tested | Not tested | Not tested | Not tested | Not tested |
+| Codex CLI 0.171.0-alpha.13.2 | Local repository catalog and cached Agent Plugin | Pass | Pass, installed file | Not tested | Not tested | Not tested | Not tested | Not tested |
+| Claude Code 2.1.150 | Extracted local standalone in `.claude/skills/` | Pass | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested |
+| Claude Code 2.1.150 | Extracted Agent Plugin through `--plugin-dir` | Pass | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested |
+| Claude.ai, Perplexity Computer, Grok web | Hosted skill or public wrapper | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested |
+| Cursor desktop and Cloud Agents, Grok Build | Plugin or standalone | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested |
+| ChatGPT desktop, web and mobile | Repository or OpenAI directory | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested |
+| Grok iOS and Android | Custom skill | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested |
+| VS Code Copilot, OpenCode, Cline, Antigravity CLI, Devin Local | Standalone | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested | Not tested |
 
-The repository now includes `.agents/plugins/marketplace.json`, pointing to the existing `taxtidy-israel/` plugin. Installation and first-use instructions are in [setup](taxtidy-israel/SETUP.md). The listing subtitle and patch version changed; runtime, numerical rules, fixtures and dependencies did not. No new runtime regression suite was added.
+For Codex, the CLI reported the enabled skill and the bundled spouse-routing reference was readable from the resolved installation. For Claude Code, the loader found one skill in each test, and invocation stopped at sign-in. The native manifest validator failed on the existing Agent Plugin because it expects Claude-specific metadata. Claude.ai, Perplexity Computer, Grok web and Copilot in VS Code 1.147.0 were signed out. The Perplexity upload therefore has no acceptance result. Its compressed, uncompressed and file-count ceilings were checked locally. Refer to [installation and support](INSTALLATION.md) for each pilot procedure.
 
-On 2026-11-20, compilation of the packaging tool, package and skill validation, Ruff lint/format, all five existing delivery tests, exact catalog/source checks, contained document links and deterministic 26-entry archive/source comparisons passed. No tax/OCR regression suite was rerun for this metadata/docs change. Current portable ZIP SHA-256: `c67de6711d30b1c690ca91c55b46f43b75255b6894505e384f2b968af66ebe12`. Actual host discovery/installation and the full installed-plugin conversation remain unverified; local catalog/package checks do not establish those outcomes. The old release and its checksum above remain historical, unchanged evidence.
+### Upgrade and rollback
 
-## Retained development evidence
+The downloaded 0.1.5 Agent Plugin and OpenAI ZIPs matched the two ZIP hashes on the [published release page](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.5). Each paired 0.1.6 standalone package reopened a private schema-v1 copy and reproduced the pre-existing estimate. After a conflicting Form 106 import invalidated that estimate, both the 0.1.6 install and its paired 0.1.5 artifact resumed the updated copy at the recorded revision without a current estimate. Original checkpoint bytes were preserved.
 
-Evidence dated 2026-11-20 records 66 passing tests, nine passing acceptance cases, synthetic CLI/PDF workflows, manual full-page review, Hebrew/Russian/Arabic projections, a separate forward-test and architecture/security ACKs. Actual Russian/Arabic conversational trials are distinct from CLI language projections. Raw reports, screenshots, private paths, ephemeral keys and case directories are not published.
+## Interpreting the results
 
-## Interpretation
-
-Numerical validation covers only the narrowly documented 2025 cases. Unsupported material facts block a complete estimate. Research for another year does not activate numerical support. The prior official simulator wage-only comparison differed by ILS 0.20 from the exact-decimal oracle; statutory rounding is unresolved. There is no complete donation/securities/benefit simulator reconciliation or filing-readiness claim.
-
-Hebrew OCR misread a visible 2025 as 2005 in a retained scan trial, which required human review. Cropped/rotated copies may be conservatively rejected. Production PDF signatures remain unvalidated; attachment acceptance, drafts and filing are separate states. Keep private cases outside the entire source checkout, as explained in [setup](taxtidy-israel/SETUP.md).
-
-No host installation, live mailbox/bank/Tax Authority account, real taxpayer, transmission, Windows/shared-storage validation or independent native-speaker review is claimed. Dependency advisory data is dated; no fresh vulnerability query is implied by a reused audit. See [detailed package scope](taxtidy-israel/VERIFICATION.md), [demo](taxtidy-israel/DEMO.md), [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
+The calculator's coverage is limited to the documented 2025 profiles. The earlier public simulator wage-only trial differed from the exact-decimal result by ILS 0.20. Production signature trust and recipient acceptance require independent verification. In an earlier OCR trial a Hebrew scan read 2005 in place of 2025. Check each material field on the source. The tests used synthetic cases throughout. See [local workflow limits](taxtidy-israel/VERIFICATION.md) and the [synthetic demo](taxtidy-israel/DEMO.md).

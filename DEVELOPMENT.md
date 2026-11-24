@@ -1,46 +1,46 @@
-# Development and package layout
+# Develop and package TaxTidy Israel
 
-TaxTidy Israel is a ChatGPT plugin. `taxtidy-israel/` is the portable distributable; `tools/` and `tests/` are development material, not additional account integrations. Root READMEs and `assets/overview.svg` introduce the project. The plugin ZIP is built separately and distributed with a SHA-256 checksum through GitHub Releases.
+The canonical skill is under `taxtidy-israel/skills/taxtidy-israel/`. The sibling plugin manifest and guides define the Agent Plugin. The repository catalog in `.agents/plugins/marketplace.json` points to `./taxtidy-israel`. The packager builds the standalone and OpenAI projections from the same allowlisted resources. Keep private cases, original documents and host logs outside the entire checkout and active workspace.
 
-The repository marketplace index is `.agents/plugins/marketplace.json`. Its one local source is `./taxtidy-israel`, resolved from the repository root. It is outside the portable ZIP. Check catalog/source identity and host discovery separately from package/runtime tests.
+## Prepare the test environment
 
-## Existing environment
-
-See [setup](taxtidy-israel/SETUP.md) for the validated Python 3.12.14/POSIX runtime and separately installed OCR prerequisites. `requirements-dev.txt` lists direct development dependencies; `requirements-dev.lock` records the validated environment. No environment or binary dependency is included. Preparing a new machine or discovering the plugin in ChatGPT has not been tested by this publication.
-
-Keep cases and originals in a private directory outside the **entire checkout**. The runtime blocks case storage inside the plugin package, but additional development-root detection relies on private scaffolding absent from a public clone. Ignore rules are not an access-control boundary.
-
-## Checks and package build
-
-Run from the repository root using the prepared interpreter. The PDF tests additionally require Tesseract and the exact local models described in setup; missing prerequisites do not count as passing tests. These commands do not install anything:
+Use Python 3.12.14 with the development lockfile and the separately managed Tesseract 5.5.4 and models described in [setup](taxtidy-israel/SETUP.md). The existing PDF tests use `/opt/homebrew/bin/tesseract` and `.runtime/tessdata`; point the latter at the verified model directory for the suite. See [third-party notices](THIRD_PARTY_NOTICES.md) for dependency licensing.
 
 ```sh
+python3 -m pip install -r requirements-dev.lock
 python3 -m compileall -q taxtidy-israel/skills/taxtidy-israel/scripts tests tools
-python3 tools/package_skill.py check
 python3 -m ruff check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m ruff format --check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m unittest discover -v -s tests -t .
-python3 tools/package_skill.py build
-python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.5.zip
+python3 -m tests.test_acceptance --report dist/synthetic-acceptance.json
 ```
 
-The packager explicitly allowlists the deliverable. Git ignore rules do not determine ZIP contents. Review both inventories when adding resources; preserve the license and notices in the standalone package. Keep private evidence and generated files out of commits, and stage reviewed paths explicitly.
+The suite uses fictional fixtures. Its reports and any intermediate PDFs remain outside the distributable. A skipped or unavailable prerequisite does not establish coverage.
 
-## OpenAI directory submission
-
-Build and check the separate skills-only ZIP from the release source:
+## Build and check the four ZIPs
 
 ```sh
-python3 tools/package_skill.py build-public dist/taxtidy-israel-0.1.5-openai.zip
-python3 tools/package_skill.py check-public-archive dist/taxtidy-israel-0.1.5-openai.zip
+python3 tools/package_skill.py check
+python3 tools/package_skill.py build dist/taxtidy-israel-plugin.zip
+python3 tools/package_skill.py check-archive dist/taxtidy-israel-plugin.zip
+python3 tools/package_skill.py build-public dist/taxtidy-israel-openai.zip
+python3 tools/package_skill.py check-public-archive dist/taxtidy-israel-openai.zip
+python3 tools/package_skill.py build-skill dist/taxtidy-israel-skill-local.zip --profile local
+python3 tools/package_skill.py check-skill-archive dist/taxtidy-israel-skill-local.zip --profile local
+python3 tools/package_skill.py build-skill dist/taxtidy-israel-skill-hosted.zip --profile hosted
+python3 tools/package_skill.py check-skill-archive dist/taxtidy-israel-skill-hosted.zip --profile hosted
 ```
 
-Edit [listing and review metadata](submission/metadata.json) for directory releases. The [public skill scope](submission/public-use.md) and [privacy notice](PRIVACY.md) describe redacted inputs, manual handling of authenticated accounts and optional private local execution. The public package rejects encrypted PDFs and omits the terminal password helper. The calculator still covers only supported 2025 cases.
+Both standalone commands take an explicit path and profile. The ZIP contents come from the packager's allowlist. ZIPs use deterministic entry order, timestamps and modes. The builder validates the candidate before replacing the destination and writes a SHA-256 sidecar. Compare two builds using the same toolchain. Check links within each archive whenever files move.
 
-Confirm the verified developer name and intended country availability in the portal. If the privacy notice changes, publish the revised text and update `interface.privacyPolicyURL` to match. Portal validation, skill scans and attestations are separate from local archive checks.
+Use the [public-use policy](submission/public-use.md), [public setup](submission/SETUP.md) and [privacy notice](PRIVACY.md) for both public projections. Only the OpenAI wrapper uses [listing metadata](submission/metadata.json) and the OpenAI icon. Both public builds exclude the local password helper and reject encrypted PDFs. Review [OpenAI's directory requirements](https://developers.openai.com/plugins/deploy/submission) before proposing a listing change.
 
-## Branches and releases
+For Perplexity, confirm the active account's compressed-upload limit and the documented 20 MB unpacked cap and 1,000-file plugin limit. Standalone intake requires a root-level skill, at most 100 files and a 20 MB cap for both sizes. The packager applies these numerical ceilings to the corresponding public ZIPs. An upload pilot still needs to verify layout, account permissions and access to bundled references. [Plugin intake](https://www.perplexity.ai/help-center/en/articles/2026100802-create-or-upload-a-custom-plugin) · [Skill intake](https://www.perplexity.ai/help-center/en/articles/13914413-how-to-use-computer-skills)
 
-Use topic branches and fork-based pull requests to `main`; only the owner merges. The intended policy blocks direct updates, force pushes and deletion of `main`, with an owner-admin exception for PR merges only. The owner-only boundary depends on retaining the owner as the sole eligible administrator; granting another eligible admin changes it. See the final publication handoff for verified remote settings. No CI status is implied by these local commands.
+## Review and release
 
-Release assets are the inspected portable ZIP and checksum, built from the tagged source. GitHub's automatically generated source archives contain development files and are not the portable plugin download. See [verification](VERIFICATION.md), [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
+1. Use a reviewed `main` revision and a clean checkout. Follow the review process in [Contributing](CONTRIBUTING.md).
+2. Check published GitHub and OpenAI versions before choosing the release version. Align the Agent Plugin manifest, the packaging version and the OpenAI listing metadata with the reviewed release plan.
+3. Rerun checks and build from the reviewed tag. Record the source commit, tag, package version, ZIP name and SHA-256. Record each host version or account surface, route, fixture, date and capability outcome in [Verification](VERIFICATION.md).
+4. Repeat clean-session discovery and synthetic guidance checks for each claimed host route. For local execution verify the supported estimate, suppressed figures for unsupported or conflicting inputs, PDF source preservation and manual review, OCR, and resume with a stale estimate. For rollback use private synthetic schema-v1 copies and the previous verified artifact's checksum.
+5. Publish reviewed ZIPs and sidecars through [GitHub Releases](https://github.com/TimurMisharin/taxtidy-israel/releases). Confirm remote assets and their hashes. Record public directory submission, approval and host activation independently.

@@ -1,47 +1,27 @@
-[English](README.md) · [עברית](README.he.md) · [Русский](README.ru.md) · [العربية](README.ar.md)
-
 # TaxTidy Israel
 
-TaxTidy Israel is an open-source ChatGPT and Codex plugin for reviewing Israeli tax records. Start with a tax year and a goal. The plugin helps you collect the right documents, reconcile income and withholding, and identify the evidence still needed to choose a filing route.
+[עברית](README.he.md) · [Русский](README.ru.md) · [العربية](README.ar.md)
 
-**[Download TaxTidy Israel 0.1.5](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.5)** · [Setup and local tools](taxtidy-israel/SETUP.md) · [Privacy](PRIVACY.md)
+TaxTidy helps you organize Israeli tax documents, reconcile evidence and prepare for a refund claim, annual return or payroll tax coordination. It keeps official Hebrew form and portal names alongside translations. Hebrew is the default, with English, Russian and Arabic available on request.
 
-## Before installing
+**Before installation or activation, read the [bilingual legal notice](taxtidy-israel/LICENSE-NOTICE.md).** TaxTidy is a general-purpose aid provided as is. It does not replace tax, legal, financial, accounting or other professional advice.
 
-TaxTidy Israel is provided as is. It does not replace tax, legal, financial, accounting, or other professional advice. Liability for losses is limited to the extent permitted by applicable law. Choosing to install or activate the plugin after the notice has been made available in advance constitutes acceptance of its terms, subject to applicable law. [Legal notice and limitation of liability](taxtidy-israel/LICENSE-NOTICE.md)
+## Install and try it
 
-## What you can review
+Open the [installation and support guide](INSTALLATION.md) for the repository marketplace, downloadable Agent Plugin and standalone skill ZIPs. The guide lists host-specific routes and the checks completed for each. For a first session, try a fictional case.
 
-- Employer certificates (**טופס 106**), payslips, withholding, and Section 46 donation evidence. Check which figures match and which require a document or clarification.
-- Annual return and refund routes for each tax year. For married spouses, version 0.1.5 distinguishes a joint return, separate tax calculation, and verified separate submissions. It checks recorded **טופס 4430** elections for the applicable year and handles written directions to correct a return already on file.
-- Filing progress. Check the evidence for a draft, a filing acknowledgment, a received attachment, a correction, or an assessment. You handle signing and filing.
-- Optional PDF review, Hebrew and English OCR, and an illustrative calculator for **supported 2025 cases**. These tools require a compatible private Python/POSIX runtime. [Capabilities and limits](taxtidy-israel/VERIFICATION.md)
+> Help me organize the evidence for a fictional 2025 Israeli refund claim. Answer in English. Start with the documents from two employers and explain what would prove that a return was filed.
 
-## Install or download
+For hosted pilots use fictional data. The public edition uses minimum redacted inputs after you confirm redaction. Retrieve your own records and handle account access, messages and filing yourself. [Privacy notice](PRIVACY.md)
 
-| Where you want to use it | How to get started |
-| --- | --- |
-| **ChatGPT desktop on macOS or Windows** | Add the repository marketplace using Codex CLI, then install TaxTidy Israel from **Plugins** in the desktop app. Native Windows calculator and OCR execution have not been validated. |
-| **ChatGPT web, Linux, or mobile** | Use the **Plugins** directory if TaxTidy Israel is available in your eligible workspace or catalog. A workspace admin can import the GitHub marketplace and make it available. |
-| **Portable package** | Download `taxtidy-israel-0.1.5.zip` and its `.sha256` file from the release. Follow the included setup guide for local tools. |
-| **OpenAI directory submission** | Download `taxtidy-israel-0.1.5-openai.zip` and its `.sha256` file. The ZIP is prepared for a separate submission, review, and publication process. |
+## What you can do
 
-For the desktop marketplace, install and sign in to Codex CLI, then run:
+- Build a checklist by tax year and reconcile reviewed wages, withholding, Section 46 donations, equity and reserve-duty records. A saved draft or uploaded attachment alone cannot prove filing.
+- Check the registered spouse, existing family file and official year-specific instructions before choosing between a joint return and separate spouse submissions. A joint return can allow a separate tax calculation. Unverified routes stay unresolved.
+- Run supported **2025 estimates**, PDF inspection and Hebrew/English OCR with a compatible private local runtime. The calculator reports missing or conflicting evidence and suppresses stale estimates. Review source figures by hand before relying on them.
 
-```sh
-codex plugin marketplace add TimurMisharin/taxtidy-israel --ref v0.1.5
-```
+[Local runtime and CLI](taxtidy-israel/SETUP.md) · [Synthetic walkthrough](taxtidy-israel/DEMO.md) · [Verification](VERIFICATION.md)
 
-Restart ChatGPT desktop, open **Plugins**, and install **TaxTidy Israel** from the marketplace. A workspace admin can instead open **Admin → Plugins → Add → Import marketplace**, set the source to `https://github.com/TimurMisharin/taxtidy-israel`, leave **Path** blank, and configure member access after the import. [Desktop marketplace instructions](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli) · [Managed workspace import](https://help.openai.com/en/articles/20001504-importing-and-syncing-plugin-marketplaces-from-github)
+For development and release checks see [Development](DEVELOPMENT.md). Report software issues using fictional examples only. [GitHub Issues](https://github.com/TimurMisharin/taxtidy-israel/issues)
 
-## Start a review
-
-Open a new chat, select **@TaxTidy Israel**, and try:
-
-> Help me review my 2025 Israeli taxes. Answer in English. Give me a document checklist and tell me what would verify my filing route.
-
-Hebrew is the default. English, Russian, and Arabic are also supported. Use fictional examples or redacted excerpts in chat, and keep originals and private case records outside the repository. [Synthetic demo](taxtidy-israel/DEMO.md) · [Privacy](PRIVACY.md)
-
-## Project links
-
-[Development and packaging](DEVELOPMENT.md) · [Contributing](CONTRIBUTING.md) · [Report an issue](https://github.com/TimurMisharin/taxtidy-israel/issues) · [AGPL-3.0-only](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[AGPL-3.0-only](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
