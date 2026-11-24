@@ -1,19 +1,15 @@
-# Verification scope
+# Local workflow and verification scope
 
-Retained development evidence dated 2026-11-20 records passing local build, portable-package and skill validation, Ruff lint/format, all 66 unit tests, and a separate nine-case acceptance report. It also records a passing real-CLI synthetic workflow, including concealed-password PDF handling, visual review, donation reconciliation, and Hebrew/Russian/Arabic projections, followed by independent architecture/security ACKs. These are historical development observations; new publication checks are reported separately in the repository's public verification summary. Raw evidence stays private.
+Use [setup](SETUP.md) for dependencies and [the synthetic walkthrough](DEMO.md) for an example. The [repository verification record](https://github.com/TimurMisharin/taxtidy-israel/blob/main/VERIFICATION.md) lists build checks, installed-artifact observations and per-host pilot results.
 
-Prior phase-4 attempt7 passed seven executable gates, 63 tests including all nine acceptance cases, full-page visual review and independent architecture/security reviews. Prior actual Russian/Arabic conversations were executed in phase3; CLI language projections are separate from conversational validation.
+## Estimates and filing evidence
 
-Numeric validation covers 2025 only: verified resident wage profiles with explicit credits/deductions, eligible Section46 donations, narrow compatible domestic securities gains/losses, certified employee reserve payments, and two conditional assistance scenarios. Foreign income/credits, general equity tax, business/rentals/retirement/special ownership, higher-income surcharge cases and other years are outside numerical support. Unsupported material facts block a complete result. Future-year research does not enable a parameter pack.
+The calculator covers supported 2025 cases with verified residency and reviewed wages, explicit credits and deductions, eligible Section 46 donations, narrow domestic securities transactions and certified reserve payments. Material unsupported facts or unresolved conflicts block a complete estimate. A previous official simulator wage-only trial displayed ILS 6,901 against ILS 6,901.20 in the exact-decimal oracle. Statutory rounding and filing readiness require independent review.
 
-A prior public official simulator trial used synthetic annual wages120000 and2.25 credit points for2025. It displayed6901; the exact-decimal oracle was6901.20. The0.20 difference does not establish statutory rounding. Full donation/securities/benefit refund simulator reconciliation was not run. Estimates remain not filing-ready.
+A joint return can use a separate tax calculation where eligible. Separate submissions require verification for the year, form and family file. Review recorded evidence of an applicable Form 4430 election and existing returns or assessment before recommending a route. Filing status depends on a matched official acknowledgment for the filing version.
 
-Known limits retained: raw OCR reads2005 where the Hebrew source visibly shows2025; the scan remains untrusted until manual review. A cropped/rotated scan can be conservatively rejected by pixel comparison. Production signatures are present_unvalidated; fixture signature verification is not issuer authentication. Local attachment readiness is not portal acceptance. Accepted attachments and saved drafts do not establish filing. Real accounts, transmission and host installation were not tested.
+## PDF and OCR
 
-The unchanged Python dependency audit is reused only after equality verification; no new advisory query is implied. Native OCR/models have separate provenance. No dependency binaries, OCR models, test fonts, private cases or ephemeral signing keys are packaged.
+The CLI preserves the original, validates a working copy and records manual review. OCR is a transcription aid. In a retained Hebrew scan trial it read 2005 where the document showed 2025. Review the rendered pages, including numeric signs and blank cells. Signature presence can be recorded. Production signature trust, recipient acceptance and live account or filing actions require separate verification.
 
-The standalone package includes the project [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md). Publication changes add documentation and licensing; numerical rules and runtime behavior remain unchanged. Host installation and live account integration remain untested.
-
-## Marketplace metadata and setup — 0.1.1
-
-Version 0.1.1 adds repository-marketplace installation instructions and a shorter listing subtitle. The repository catalog points to this existing plugin directory; no account-upload creation is required. This catalog is outside the portable ZIP. Runtime code, numerical rules, fixtures, dependency pins and numerical coverage are unchanged. Local catalog/package validation is separate from host discovery, installation and conversational execution, which remain unverified. No new runtime regression suite or fresh dependency advisory audit is claimed.
+The archive contains source, rule data, templates and documentation. Python packages, OCR executables and models, test fonts, cases and credentials are supplied separately or excluded. Keep case data outside the package, enclosing source checkout and active workspace. See the [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
