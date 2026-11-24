@@ -21,7 +21,7 @@ python3 -m ruff check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m ruff format --check taxtidy-israel/skills/taxtidy-israel/scripts tests tools
 python3 -m unittest discover -v -s tests -t .
 python3 tools/package_skill.py build
-python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.3.zip
+python3 tools/package_skill.py check-archive dist/taxtidy-israel-0.1.5.zip
 ```
 
 The packager explicitly allowlists the deliverable. Git ignore rules do not determine ZIP contents. Review both inventories when adding resources; preserve the license and notices in the standalone package. Keep private evidence and generated files out of commits, and stage reviewed paths explicitly.
@@ -31,8 +31,8 @@ The packager explicitly allowlists the deliverable. Git ignore rules do not dete
 Build and check the separate skills-only ZIP from the release source:
 
 ```sh
-python3 tools/package_skill.py build-public dist/taxtidy-israel-0.1.4-openai.zip
-python3 tools/package_skill.py check-public-archive dist/taxtidy-israel-0.1.4-openai.zip
+python3 tools/package_skill.py build-public dist/taxtidy-israel-0.1.5-openai.zip
+python3 tools/package_skill.py check-public-archive dist/taxtidy-israel-0.1.5-openai.zip
 ```
 
 Edit [listing and review metadata](submission/metadata.json) for directory releases. The [public skill scope](submission/public-use.md) and [privacy notice](PRIVACY.md) describe redacted inputs, manual handling of authenticated accounts and optional private local execution. The public package rejects encrypted PDFs and omits the terminal password helper. The calculator still covers only supported 2025 cases.
