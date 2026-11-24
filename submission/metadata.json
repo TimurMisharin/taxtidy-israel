@@ -1,5 +1,5 @@
 {
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": {
     "name": "Timur Misharin"
   },
@@ -29,6 +29,6 @@
     ]
   },
   "publication": {
-    "release_notes": "Adds year-specific verification for married spouses’ filing routes, recorded Form 4430 elections, and correction of existing family returns."
+    "release_notes": "Updates installed case-path protection and public privacy instructions, while retaining year-specific spouse routing and supported 2025 estimates."
   }
 }
