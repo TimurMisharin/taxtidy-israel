@@ -4,12 +4,16 @@ import calendar
 import copy
 import json
 import os
+import shutil
 import stat
+import subprocess
+import sys
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
 from tests.support import (
+    SCRIPTS,
     baseline,
     batch,
     case,
@@ -237,6 +241,76 @@ class CaseTests(unittest.TestCase):
             (root / "checkpoint.json").chmod(0o644)
             with self.assertRaises(case.CaseError):
                 case.load(root)
+
+    def test_source_boundaries_from_installed_cli(self):
+        for layout in ("standalone", "plugin", "git-directory", "git-file", "marker"):
+            with self.subTest(layout=layout), temporary() as parent:
+                parent = Path(parent)
+                source = parent / "install"
+                wrapped = layout != "standalone"
+                plugin = source if layout == "plugin" else source / "plugin"
+                skill = (
+                    plugin / "skills/taxtidy-israel"
+                    if wrapped
+                    else source / "taxtidy-israel"
+                )
+                shutil.copytree(
+                    SCRIPTS.parent, skill, ignore=shutil.ignore_patterns("__pycache__")
+                )
+                protected = [skill]
+                if wrapped:
+                    (plugin / "plugin.json").write_text("{}")
+                    protected.append(plugin)
+                if layout == "git-directory":
+                    (source / ".git").mkdir()
+                elif layout == "git-file":
+                    (source / ".git").write_text(
+                        "gitdir: /fictional/git/worktrees/install\n"
+                    )
+                elif layout == "marker":
+                    marker = source / ".docs/plans/taxtidy-israel.md"
+                    marker.parent.mkdir(parents=True)
+                    marker.touch()
+                if layout in {"git-directory", "git-file", "marker"}:
+                    protected.append(source)
+
+                def init(target, skill=skill):
+                    return subprocess.run(
+                        [
+                            sys.executable,
+                            str(skill / "scripts/taxtidy.py"),
+                            "init",
+                            "--case-root",
+                            str(target),
+                            "--taxpayer-id",
+                            "fictional-taxpayer",
+                            "--years",
+                            "2025",
+                            "--synthetic",
+                        ],
+                        check=False,
+                        capture_output=True,
+                        text=True,
+                        timeout=15,
+                    )
+
+                neighbor = parent / "private-case"
+                if not wrapped:
+                    neighbor = skill.with_name("private-case")
+                result = init(neighbor)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertTrue((neighbor / "checkpoint.json").is_file())
+                for directory in protected:
+                    with self.subTest(protected=directory.name):
+                        for target in (directory, directory / "case"):
+                            result = init(target)
+                            self.assertEqual(result.returncode, 1, result.stdout)
+                            self.assertEqual(
+                                json.loads(result.stderr)["reason"],
+                                "case_inside_shared_source",
+                            )
+                        self.assertFalse((directory / "case").exists())
+                        self.assertFalse((directory / "checkpoint.json").exists())
 
     def test_money_and_json_boundaries(self):
         for invalid in (1.0, True, "NaN", "Infinity", "1,000", "1e3", " 1", "01"):
