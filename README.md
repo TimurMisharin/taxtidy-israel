@@ -2,50 +2,46 @@
 
 # TaxTidy Israel
 
-TaxTidy Israel is an open-source ChatGPT plugin for reviewing Israeli tax records. It helps you choose a route for each year, reconcile salary and withholding, check Section 46 donations, and identify the evidence needed to confirm a filing. The bundled calculator supports a limited set of **2025** cases.
+TaxTidy Israel is an open-source ChatGPT and Codex plugin for reviewing Israeli tax records. Start with a tax year and a goal. The plugin helps you collect the right documents, reconcile income and withholding, and identify the evidence still needed to choose a filing route.
 
-**Version 0.1.3** · [GitHub release and checksum](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.3) · [AGPL-3.0-only](LICENSE)
+**[Download TaxTidy Israel 0.1.5](https://github.com/TimurMisharin/taxtidy-israel/releases/tag/v0.1.5)** · [Setup and local tools](taxtidy-israel/SETUP.md) · [Privacy](PRIVACY.md)
 
-**Before installing.** TaxTidy Israel does not replace tax, legal, financial, accounting, or other professional advice. It is provided as is. Liability for financial or other losses is limited to the extent permitted by applicable law. [Legal notice and limitation of liability](taxtidy-israel/LICENSE-NOTICE.md)
+## Before installing
 
-Choosing to install or activate the plugin on any platform after the notice has been made available in advance constitutes acceptance of its terms, subject to applicable law. Installation or activation alone creates no entitlement to support, maintenance, updates, or professional services.
+TaxTidy Israel is provided as is. It does not replace tax, legal, financial, accounting, or other professional advice. Liability for losses is limited to the extent permitted by applicable law. Choosing to install or activate the plugin after the notice has been made available in advance constitutes acceptance of its terms, subject to applicable law. [Legal notice and limitation of liability](taxtidy-israel/LICENSE-NOTICE.md)
 
-## Install by platform
+## What you can review
 
-| Platform | Installation |
+- Employer certificates (**טופס 106**), payslips, withholding, and Section 46 donation evidence. Check which figures match and which require a document or clarification.
+- Annual return and refund routes for each tax year. For married spouses, version 0.1.5 distinguishes a joint return, separate tax calculation, and verified separate submissions. It checks recorded **טופס 4430** elections for the applicable year and handles written directions to correct a return already on file.
+- Filing progress. Check the evidence for a draft, a filing acknowledgment, a received attachment, a correction, or an assessment. You handle signing and filing.
+- Optional PDF review, Hebrew and English OCR, and an illustrative calculator for **supported 2025 cases**. These tools require a compatible private Python/POSIX runtime. [Capabilities and limits](taxtidy-israel/VERIFICATION.md)
+
+## Install or download
+
+| Where you want to use it | How to get started |
 | --- | --- |
-| **ChatGPT on macOS** | Install [ChatGPT desktop](https://chatgpt.com/download/), then follow the [repository marketplace steps](#repository-marketplace-on-desktop). |
-| **ChatGPT on Windows** | Install [ChatGPT desktop](https://chatgpt.com/download/), then follow the same [marketplace steps](#repository-marketplace-on-desktop) in PowerShell. The native Windows calculator and OCR runtime have not been validated. |
-| **Linux** | Open [ChatGPT in your browser](https://chatgpt.com/) and use the web instructions below. OpenAI's native ChatGPT desktop downloads cover macOS and Windows. Codex CLI can register the repository, but that does not give the browser access to it. |
-| **ChatGPT web** | Open **Plugins** in the sidebar. If your workspace admin has [imported the GitHub marketplace](#managed-chatgpt-workspaces), select the workspace directory, search for **TaxTidy Israel**, and choose **Install plugin** when offered. |
-| **ChatGPT on iPhone or Android** | Install or update the official [ChatGPT mobile app](https://chatgpt.com/download/). Sign in to your eligible workspace, open **Plugins**, search for **TaxTidy Israel** and choose **Install plugin** when offered. The plugin must be visible in that workspace or in the public directory. |
+| **ChatGPT desktop on macOS or Windows** | Add the repository marketplace using Codex CLI, then install TaxTidy Israel from **Plugins** in the desktop app. Native Windows calculator and OCR execution have not been validated. |
+| **ChatGPT web, Linux, or mobile** | Use the **Plugins** directory if TaxTidy Israel is available in your eligible workspace or catalog. A workspace admin can import the GitHub marketplace and make it available. |
+| **Portable package** | Download `taxtidy-israel-0.1.5.zip` and its `.sha256` file from the release. Follow the included setup guide for local tools. |
+| **OpenAI directory submission** | Download `taxtidy-israel-0.1.5-openai.zip` and its `.sha256` file. The ZIP is prepared for a separate submission, review, and publication process. |
 
-**Public ChatGPT directory status:** The GitHub release provides the portable package. Public listing in ChatGPT requires [OpenAI submission, review and publication](https://developers.openai.com/plugins/deploy/submission). Until then, personal web and mobile accounts cannot install this GitHub release from the public directory. Workspace, plan and region can affect access. [OpenAI plugin availability](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt)
+For the desktop marketplace, install and sign in to Codex CLI, then run:
 
-### Repository marketplace on desktop
+```sh
+codex plugin marketplace add TimurMisharin/taxtidy-israel --ref v0.1.5
+```
 
-1. Install and sign in to [Codex CLI](https://learn.chatgpt.com/docs/codex/cli). Run this in Terminal on macOS or PowerShell on Windows:
+Restart ChatGPT desktop, open **Plugins**, and install **TaxTidy Israel** from the marketplace. A workspace admin can instead open **Admin → Plugins → Add → Import marketplace**, set the source to `https://github.com/TimurMisharin/taxtidy-israel`, leave **Path** blank, and configure member access after the import. [Desktop marketplace instructions](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli) · [Managed workspace import](https://help.openai.com/en/articles/20001504-importing-and-syncing-plugin-marketplaces-from-github)
 
-   ```sh
-   codex plugin marketplace add TimurMisharin/taxtidy-israel
-   ```
+## Start a review
 
-2. Restart the ChatGPT desktop app. Open **Plugins**, select the **TaxTidy Israel** marketplace, open **TaxTidy Israel**, and choose **Install plugin**.
-3. If the marketplace is missing, check that the command succeeded and your desktop client and workspace allow local marketplaces. [OpenAI marketplace instructions](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli)
+Open a new chat, select **@TaxTidy Israel**, and try:
 
-### Managed ChatGPT workspaces
+> Help me review my 2025 Israeli taxes. Answer in English. Give me a document checklist and tell me what would verify my filing route.
 
-A workspace admin opens **Admin → Plugins → Add → Import marketplace**, enters `https://github.com/TimurMisharin/taxtidy-israel` as **Source**, leaves **Path** blank, and leaves the Git reference blank to follow `main`. Authorize GitHub access if prompted, review the import, then make TaxTidy Israel available for members to install. [OpenAI workspace import guide](https://learn.chatgpt.com/docs/enterprise/plugin-management)
+Hebrew is the default. English, Russian, and Arabic are also supported. Use fictional examples or redacted excerpts in chat, and keep originals and private case records outside the repository. [Synthetic demo](taxtidy-israel/DEMO.md) · [Privacy](PRIVACY.md)
 
-## Start a case
+## Project links
 
-1. Start a new chat and select **@TaxTidy Israel**. Hebrew is the default. You can ask in English, Russian or Arabic.
-2. Name the tax year and goal. For example: “Help me review my 2025 Israeli taxes. Answer in English. Start with the documents I need and what they establish.”
-3. Review the original documents the plugin requests, such as **טופס 106** (Form 106), bank certificates, and donation receipts. Ask which items are reconciled, which are missing, and which official step is next.
-
-Chat guidance can work without a local executor. The **2025** calculator and PDF/OCR tools require a compatible private Python/POSIX runtime with separate dependencies. Review extracted amounts against the originals. The plugin neither connects to your tax account by default nor files returns. Keep case records and credentials out of GitHub. [Runtime and setup](taxtidy-israel/SETUP.md)
-
-## Project resources
-
-- [Synthetic example](taxtidy-israel/DEMO.md) · [Verified capabilities and limits](taxtidy-israel/VERIFICATION.md)
-- [Development and packaging](DEVELOPMENT.md) · [Report an issue](https://github.com/TimurMisharin/taxtidy-israel/issues) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[Development and packaging](DEVELOPMENT.md) · [Contributing](CONTRIBUTING.md) · [Report an issue](https://github.com/TimurMisharin/taxtidy-israel/issues) · [AGPL-3.0-only](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)

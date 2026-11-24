@@ -1,5 +1,5 @@
 {
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": {
     "name": "Timur Misharin"
   },
@@ -29,6 +29,6 @@
     ]
   },
   "publication": {
-    "release_notes": "Adds a redacted-input workflow, a directory listing and starter prompts. The public skill covers document checklists, evidence reconciliation and illustrative estimates for supported 2025 cases."
+    "release_notes": "Adds year-specific verification for married spouses’ filing routes, recorded Form 4430 elections, and correction of existing family returns."
   }
 }

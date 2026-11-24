@@ -17,7 +17,7 @@ import yaml
 
 DESCRIPTION = "Find your tax documents, estimate your refund or balance due, and see what still needs filing."
 PUBLIC_DESCRIPTION = "Organize Israeli tax records, reconcile evidence, and explore limited 2025 estimates using redacted or fictional inputs."
-VERSION = "0.1.3"
+VERSION = "0.1.5"
 INSTALL_SUBTITLE = "כלי עזר בלבד • אינו ייעוץ מס"
 DEFAULT_ROOT = Path(__file__).resolve().parents[1] / "taxtidy-israel"
 SUBMISSION_ROOT = DEFAULT_ROOT.parent / "submission"
