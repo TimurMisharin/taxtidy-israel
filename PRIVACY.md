@@ -1,6 +1,6 @@
 # TaxTidy Israel privacy notice
 
-This notice covers the public OpenAI directory edition of TaxTidy Israel, an open-source skill for organizing Israeli tax documents and checking supporting evidence. Users can start with a tax year and goal or use fictional examples throughout.
+This notice covers the OpenAI directory and hosted standalone editions of TaxTidy Israel, an open-source skill for organizing Israeli tax documents and checking supporting evidence. Users can start with a tax year and goal or use fictional examples throughout.
 
 ## What the skill uses
 
@@ -8,7 +8,7 @@ TaxTidy may use a selected tax year, a general description of the user's situati
 
 ## Who receives information
 
-The public skill has no TaxTidy-operated server or telemetry in the shipped code. Content you send in a ChatGPT or Codex session is handled by OpenAI under its applicable [privacy policy](https://openai.com/policies/privacy-policy/) and account or organization settings. Optional local tools read and write in the private working environment provided for your case. They do not send case contents to the maintainer or connect to mailboxes, brokers, or tax portals. The maintainer and GitHub may see what you voluntarily post in the public support tracker. Use fictional examples in support posts.
+The public skill has no TaxTidy-operated server or telemetry in the shipped code. Content you send in a ChatGPT or Codex session is handled by OpenAI under its applicable [privacy policy](https://openai.com/policies/privacy-policy/) and account or organization settings. On other hosts, consult the provider's privacy policy and settings before sharing anything. Optional local tools read and write in the private working environment provided for your case. They do not send case contents to the maintainer or connect to mailboxes, brokers, or tax portals. The maintainer and GitHub may see what you voluntarily post in the public support tracker. Use fictional examples in support posts.
 
 ## Retention and controls
 

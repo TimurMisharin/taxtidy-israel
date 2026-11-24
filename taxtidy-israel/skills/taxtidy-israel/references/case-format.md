@@ -1,6 +1,6 @@
 # Phase-3 local case format
 
-This is the authoritative implemented local format. No external service accepts this schema by implication. Runtime: Python 3.12+, single-user POSIX filesystem with `fcntl` locking, no shared hosted case directory. Use a private explicit absolute root **outside** this package and its source repository. Each case has directory mode 0700, files 0600 and its own opaque case ID. Do not use symlink components; on platforms with a `/var` alias choose the resolved private path. The parent must already exist. The initializer refuses any existing target.
+This is the authoritative implemented local format. No external service accepts this schema by implication. Runtime: Python 3.12+, single-user POSIX filesystem with `fcntl` locking, no shared hosted case directory. Use a private explicit absolute root **outside** this package, its source checkout and the active workspace. Each case has directory mode 0700, files 0600 and its own opaque case ID. Do not use symlink components; on platforms with a `/var` alias choose the resolved private path. The parent must already exist. The initializer refuses any existing target.
 
 From the skill directory, using the prepared Python interpreter:
 

@@ -1,17 +1,19 @@
-# TaxTidy Israel
+# TaxTidy Israel public setup
 
-TaxTidy Israel provides checklists, evidence reconciliation and sourced explanations for Israeli taxes. It includes a calculator for limited 2025 cases and PDF/OCR utilities for unencrypted, redacted inputs. Read the [legal notice](LICENSE-NOTICE.md) before installation and the [privacy notice](PRIVACY.md) before sharing information.
+**Before installation or activation, read the [bilingual legal notice](../taxtidy-israel/LICENSE-NOTICE.md).** TaxTidy is a general-purpose aid provided as is. It does not replace tax, legal, financial, accounting, or other professional advice. See the [privacy notice](../PRIVACY.md), [AGPL-3.0-only license](../taxtidy-israel/LICENSE) and [third-party notices](../taxtidy-israel/THIRD_PARTY_NOTICES.md).
 
-## Start with a checklist
+## Start with a year and a goal
 
-Ask “What documents should I gather to review Israeli taxes for 2025?” A tax year and goal are enough to start. The skill defaults to Hebrew and can answer in English, Russian or Arabic. Keep official Hebrew form names alongside translations.
+Ask “What documents should a fictional taxpayer gather to review their 2025 Israeli taxes?” Hebrew is the default. You can ask for English, Russian or Arabic. Keep official Hebrew labels alongside translations.
 
-Use fictional examples or the minimum figures from documents you review yourself. Remove identifying details from excerpts outside the plugin before sharing. The skill can explain how to obtain documents and what to check. You handle authenticated accounts, messages, and filing yourself.
+Use fictional data in hosted pilots. In later authorized use, share manually extracted totals and aliases first. Share the minimum financial excerpt or file only after removing identifiers, account numbers, signatures, barcodes and other unrelated details, including underlying PDF text and metadata. Affirm that you have redacted the material before asking TaxTidy to process it. Any PDF must be unencrypted. Keep original documents and credentials private.
 
-## Optional local tools
+The taxpayer retrieves records, handles authenticated accounts, sends messages and files through official channels. The assistant can explain public criteria and prepare checklists and drafts. Case-specific filing decisions require verification with the Israeli Tax Authority or a qualified professional.
 
-If you have a private supported local executor, the validated runtime is Python 3.12.14 on single-user POSIX storage. Install the pinned [Python requirements](skills/taxtidy-israel/requirements.txt) in an isolated environment. OCR additionally requires Tesseract 5.5.4 and the official `heb`, `eng` and `osd` models. Set their actual directory using `--tessdata-dir`. See the [case format](skills/taxtidy-israel/references/case-format.md) and [PDF checks](skills/taxtidy-israel/references/pdf-workflow.md).
+## Optional private execution
 
-Use case aliases and a private directory outside the source checkout. Keep originals outside the plugin workflow. From the skill directory, run `python3 scripts/taxtidy.py --help` for commands. Without the local environment, use the checklists and reconcile documents manually.
+Where private local execution is available, use Python 3.12.14 on single-user POSIX storage and the [pinned requirements](../taxtidy-israel/skills/taxtidy-israel/requirements.txt). OCR requires Tesseract 5.5.4 and the official `heb`, `eng` and `osd` models. See the [case format](../taxtidy-israel/skills/taxtidy-israel/references/case-format.md) and [PDF review procedure](../taxtidy-israel/skills/taxtidy-israel/references/pdf-workflow.md).
 
-For software support, use [TaxTidy Israel GitHub Issues](https://github.com/TimurMisharin/taxtidy-israel/issues) with fictional test data only.
+Use aliases and a private directory outside the installed skill, any enclosing checkout and the active workspace. From the bundled `skills/taxtidy-israel` directory, run `python3 scripts/taxtidy.py --help`. If you have no compatible executor with private storage, follow the checklists and reconcile the evidence manually.
+
+Use fictional examples when reporting a software issue. [TaxTidy Israel GitHub Issues](https://github.com/TimurMisharin/taxtidy-israel/issues)

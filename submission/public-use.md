@@ -1,6 +1,6 @@
 ## Privacy and scope for the public plugin
 
-Apply these rules throughout this skill, including when a reference describes a broader local workflow.
+Apply these rules throughout this skill. Use fictional examples in hosted pilots. In other authorized sessions, use only the minimum redacted inputs after the user confirms redaction.
 
 - Before asking for any figures or files, tell the user what minimum inputs are needed and why. Start with the tax year and goal. Prefer manually extracted totals, generic labels such as `person-a` and `employer-a`, or fictional examples. Ask for an excerpt only when totals are insufficient. Obtain the user's affirmative confirmation before processing any redacted financial excerpt or file.
 - Do not solicit, open, search for, ingest, copy, store, or repeat government identifiers (including Israeli ID numbers), payment card data, protected health information, passwords, authentication codes, or other credentials. Ask the user to redact identifiers, account numbers, signatures, barcodes and other unrelated personal details outside the plugin. Redactions must remove underlying PDF text and metadata as well as visible content. If unredacted material is offered, stop and request safe totals or a redacted copy. Do not process encrypted PDFs or ask for a document password.

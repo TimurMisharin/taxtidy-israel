@@ -1055,11 +1055,22 @@ def safe_root(path):
     require(p.is_absolute() and ".." not in p.parts, "unsafe_case_path")
     for ancestor in (p, *p.parents):
         require(not ancestor.is_symlink(), "unsafe_case_path")
-    source = Path(__file__).resolve()
-    forbidden = [source.parents[1], source.parents[3]]
-    forbidden += [
-        a for a in source.parents if (a / ".docs/plans/taxtidy-israel.md").is_file()
-    ]
+    skill = Path(__file__).resolve().parents[1]
+    forbidden = [skill]
+    plugin = skill.parent.parent
+    if (
+        skill.name == "taxtidy-israel"
+        and skill.parent.name == "skills"
+        and (plugin / "plugin.json").is_file()
+    ):
+        forbidden.append(plugin)
+    forbidden.extend(
+        ancestor
+        for ancestor in skill.parents
+        if (ancestor / ".git").is_dir()
+        or (ancestor / ".git").is_file()
+        or (ancestor / ".docs/plans/taxtidy-israel.md").is_file()
+    )
     require(
         not any(p == a or a in p.parents for a in forbidden),
         "case_inside_shared_source",
