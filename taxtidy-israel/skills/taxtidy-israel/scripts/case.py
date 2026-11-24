@@ -1872,6 +1872,150 @@ SPOUSE_CHECKS = {
 }
 
 
+ANNUAL_ROUTE_FORMS = {"135", "1301", "correction"}
+CORRECTION_OUTCOMES = {"correction_accepted", "revised_assessment_issued"}
+
+
+def validate_family_route(event, details):
+    family = details["family_route"]
+    exact(
+        family,
+        {
+            "marital_status",
+            "effective_date",
+            "family_file",
+            "return_on_record",
+            "return_reference",
+            "office_direction",
+            "office_reference",
+            "submission",
+            "separate_calculation",
+            "route_reference",
+            "form_4430_required",
+            "recorded_4430",
+        },
+    )
+    status = family["marital_status"]
+    require(
+        status
+        in {"unknown", "never_married", "married", "separated", "divorced", "widowed"}
+    )
+    effective = family["effective_date"]
+    date_field(effective)
+    effective_year = date.fromisoformat(effective).year if effective else None
+    if effective_year is not None:
+        require(
+            effective_year <= event["tax_year"] and effective <= event["observed_at"]
+        )
+    change_year = effective_year == event["tax_year"]
+    submission = family["submission"]
+    require(submission in {"unknown", "individual", "joint", "separate"})
+    require(type(family["separate_calculation"]) is bool)
+    require(not family["separate_calculation"] or submission == "joint")
+    prior = family["return_on_record"]
+    require(prior in {"unknown", "none", "pending", "filed", "assessed"})
+    direction = family["office_direction"]
+    require(direction in {"unknown", "none", "joint", "separate", "correct_joint"})
+    for key in (
+        "family_file",
+        "return_reference",
+        "office_reference",
+        "route_reference",
+    ):
+        if family[key] is not None:
+            text(family[key])
+            invalid = {"unknown", "not_applicable"}
+            if key != "family_file":
+                invalid.add("none")
+            require(family[key] not in invalid)
+    require(
+        (family["office_reference"] is not None)
+        == (direction in {"joint", "separate", "correct_joint"})
+    )
+    requires_election = family["form_4430_required"]
+    require(requires_election is None or type(requires_election) is bool)
+    election = family["recorded_4430"]
+    if requires_election or election is not None:
+        require(change_year, "form_4430_change_year_required")
+    if election is not None:
+        exact(election, {"tax_year", "submission", "reference"})
+        require(
+            type(election["tax_year"]) is int
+            and election["tax_year"] == event["tax_year"],
+            "form_4430_change_year_required",
+        )
+        require(election["submission"] in {"joint", "separate"})
+        text(election["reference"])
+        require(election["reference"] not in {"unknown", "not_applicable", "none"})
+    if details["route_status"] != "verified":
+        return
+    reviewed_source(event["source"], event["review"], {"event", "family_route"})
+    correction = event["form"] == "correction"
+    require(
+        status != "unknown"
+        and (effective is None) == (status == "never_married")
+        and details["checks"]["family_change"] == change_year
+        and details["rules_source"].get("form") == event["form"]
+        and family["route_reference"] is not None
+        and prior not in {"unknown", "pending"}
+        and direction != "unknown"
+        and requires_election is not None,
+        "family_route_verification_required",
+    )
+    if status == "never_married":
+        require(submission == "individual", "family_route_verification_required")
+    if status == "married" or submission in {"joint", "separate"}:
+        require(
+            submission in {"joint", "separate"}
+            and details["spouse"]["registered_spouse"]
+            not in {"unknown", "not_applicable", "none"}
+            and family["family_file"] is not None,
+            "family_route_verification_required",
+        )
+    else:
+        require(submission == "individual", "family_route_verification_required")
+    # Written instructions can disambiguate the existing family return without importing the spouse's case.
+    has_return = prior in {"filed", "assessed"}
+    require(
+        not has_return or family["return_reference"] is not None,
+        "family_return_reference_required",
+    )
+    if correction:
+        require(
+            has_return
+            and (submission == "individual" or submission == "joint")
+            and (
+                direction == "none"
+                or submission == "joint"
+                and direction in {"joint", "correct_joint"}
+            )
+            and (submission != "joint" or family["family_file"] != "none"),
+            "family_correction_route_required",
+        )
+    else:
+        require(
+            direction != "correct_joint"
+            and (direction == "none" or direction == submission)
+            and (
+                not has_return or (submission == "separate" and direction == "separate")
+            ),
+            "existing_family_return_route_required",
+        )
+    if election is not None and not correction:
+        require(election["submission"] == submission, "recorded_form_4430_required")
+    if (
+        change_year
+        and not correction
+        and (requires_election or (status == "married" and submission == "separate"))
+    ):
+        require(election is not None, "recorded_form_4430_required")
+    if not change_year:
+        require(
+            details["spouse"]["form_4430"] == "not_applicable",
+            "form_4430_change_year_required",
+        )
+
+
 def workflow_event(raw, state):
     exact(
         raw,
@@ -1964,7 +2108,13 @@ def workflow_event(raw, state):
                 "cancelled",
                 "assessment_issued",
             }
+            | CORRECTION_OUTCOMES
         )
+        if d["status"] in CORRECTION_OUTCOMES:
+            require(
+                raw["form"] == "correction" and raw["provenance"] == "verified_source",
+                "review_required",
+            )
     elif kind in {"donation_registry", "filed_donation"}:
         filed = kind == "filed_donation"
         exact(
@@ -2076,9 +2226,11 @@ def workflow_event(raw, state):
             require(not d["extension_applicable"] and d["extension_reference"] is None)
     elif kind == "route":
         exact(
-            d, {"route_status", "filing_obligation", "checks", "spouse", "rules_source"}
+            d,
+            {"route_status", "filing_obligation", "checks", "spouse", "rules_source"}
+            | ({"family_route"} if "family_route" in d else set()),
         )
-        require(raw["form"] in {"135", "1301", "coordination", "relief", "correction"})
+        require(raw["form"] in ANNUAL_ROUTE_FORMS | {"coordination", "relief"})
         require(d["route_status"] in {"candidate", "unresolved", "verified"})
         require(d["filing_obligation"] in {"required", "not_required", "unresolved"})
         exact(d["checks"], ROUTE_CHECKS)
@@ -2087,13 +2239,20 @@ def workflow_event(raw, state):
         for value in d["spouse"].values():
             text(value)
         if d["rules_source"] is not None:
-            exact(d["rules_source"], {"url", "tax_year", "verified_at", "field"})
-            official_url(d["rules_source"]["url"])
-            require(d["rules_source"]["tax_year"] == raw["tax_year"])
-            require(d["rules_source"]["verified_at"] is not None)
-            date_field(d["rules_source"]["verified_at"])
-            require(d["rules_source"]["verified_at"] <= raw["observed_at"])
-            text(d["rules_source"]["field"])
+            rules = d["rules_source"]
+            exact(
+                rules,
+                {"url", "tax_year", "verified_at", "field"}
+                | ({"form"} if "form" in rules else set()),
+            )
+            if "form" in rules:
+                require(rules["form"] == raw["form"], "route_form_mismatch")
+            official_url(rules["url"])
+            require(rules["tax_year"] == raw["tax_year"])
+            require(rules["verified_at"] is not None)
+            date_field(rules["verified_at"])
+            require(rules["verified_at"] <= raw["observed_at"])
+            text(rules["field"])
         if d["route_status"] == "verified":
             require(
                 raw["provenance"] == "verified_source"
@@ -2103,6 +2262,9 @@ def workflow_event(raw, state):
                 and d["filing_obligation"] != "unresolved",
                 "route_verification_required",
             )
+        if "family_route" in d:
+            require(raw["form"] in ANNUAL_ROUTE_FORMS)
+            validate_family_route(out, d)
     elif kind == "forecast":
         exact(d, {"payers", "assumptions", "payroll_relief"})
         require(type(d["payers"]) is list and d["payers"])
@@ -2274,6 +2436,12 @@ def record_event(path, batch):
         state[collection] = records(state[collection] + [event])
         if state == before:
             return state
+        if event["kind"] == "route" and event["form"] in ANNUAL_ROUTE_FORMS:
+            require(
+                event["details"]["route_status"] != "verified"
+                or "family_route" in event["details"],
+                "family_route_verification_required",
+            )
         changed = [
             y
             for y in state["years"]
@@ -2328,11 +2496,15 @@ def filing_projection(state, tax_year):
     events = workflow_records(state, "return", tax_year)
     contexts = {(e["form"], e["draft_version"]) for e in events}
     rows = []
+    corrections = []
     for form, version in sorted(contexts):
         matching = [
             e for e in events if e["form"] == form and e["draft_version"] == version
         ]
         statuses = {e["details"]["status"] for e in matching}
+        if form == "correction" and statuses & CORRECTION_OUTCOMES:
+            corrections.extend(event_projection(e) for e in matching)
+            continue
         status = (
             "cancelled"
             if "cancelled" in statuses
@@ -2396,6 +2568,7 @@ def filing_projection(state, tax_year):
         "state": overall,
         "returns": rows,
         "attachments": attachments,
+        "corrections": corrections,
         "settlements": [
             event_projection(e) for e in workflow_records(state, "settlement", tax_year)
         ],
@@ -2697,46 +2870,83 @@ def route_projection(state, tax_year, current_year, filing):
     recorded = workflow_records(state, "route", tax_year, False)
     latest = max((e["event_date"] for e in recorded), default=None)
     current = [e for e in recorded if e["event_date"] == latest]
-    reviewed = (
-        len(current) == 1
-        and current[0]["provenance"] == "verified_source"
-        and current[0]["details"]["route_status"] == "verified"
+    event = current[0] if len(current) == 1 else None
+    details = event["details"] if event else {}
+    family = details.get("family_route")
+    reviewed = bool(
+        event
+        and event["provenance"] == "verified_source"
+        and details["route_status"] == "verified"
     )
+    family_verified = reviewed and family is not None
     pending = any(
         r["status"] == "transmitted_acknowledgment_unverified"
         for r in filing["returns"]
+    ) or bool(family and family["return_on_record"] == "pending")
+    prior = any(
+        r["status"] != "cancelled"
+        and (
+            r["status"] == "filing_completed"
+            or "assessment_issued" in r["observed_statuses"]
+        )
+        and r["form"] in {"135", "1301"}
+        for r in filing["returns"]
     )
-    prior = any(r["status"] == "filing_completed" for r in filing["returns"])
-    if tax_year == current_year:
-        candidates = ["coordination", "relief"]
-    elif tax_year > current_year or pending:
-        candidates = []
-    elif prior:
-        candidates = ["correction"]
-    else:
-        candidates = ["135", "1301"]
-    prior_unverified = (
+    family_prior = bool(family and family["return_on_record"] in {"filed", "assessed"})
+    family_correction = bool(
+        family_prior and family["office_direction"] in {"joint", "correct_joint"}
+    )
+    prior_unverified = bool(
         reviewed
-        and not prior
-        and current[0]["details"]["checks"]["prior_filing"]
+        and not (prior or family_prior)
+        and details["checks"]["prior_filing"]
         and tax_year < current_year
     )
-    if prior_unverified:
+    if tax_year == current_year:
+        candidates = ["coordination", "relief"]
+    elif tax_year > current_year or pending or prior_unverified:
         candidates = []
-    obligation = (
-        current[0]["details"]["filing_obligation"] if reviewed else "unresolved"
-    )
+    elif (
+        prior
+        or family_correction
+        or (family_verified and event["form"] == "correction")
+    ):
+        candidates = ["correction"]
+    elif family_prior and not (family_verified and family["submission"] == "separate"):
+        candidates = []
+    else:
+        candidates = ["135", "1301"]
+    obligation = details["filing_obligation"] if reviewed else "unresolved"
     if obligation == "required" and "135" in candidates:
         candidates.remove("135")
-    verified = reviewed and current[0]["form"] in candidates
+    verified = (
+        reviewed
+        and event["form"] in candidates
+        and (event["form"] not in ANNUAL_ROUTE_FORMS or family_verified)
+    )
+    evidence_needed = None
+    if tax_year < current_year and not verified:
+        if pending or prior_unverified:
+            evidence_needed = "Retrieve the filed version, acknowledgment and any assessment for this year before selecting a route."
+        elif "correction" in candidates:
+            evidence_needed = "Obtain the existing filed version and the assessing office's correction procedure for the return and assessment on record."
+        elif family and family["form_4430_required"] and not family["recorded_4430"]:
+            evidence_needed = "Obtain Tax Authority confirmation of the Form 4430 election recorded for this year and whether the route is still available."
+        else:
+            evidence_needed = "Verify marital status and effective date, registered spouse, family file, returns and assessments, and any written office directions. Obtain year- and form-specific official support for the proposed submission."
     return {
         "recorded": [event_projection(e) for e in recorded],
         "route_status": "verified" if verified else "unresolved",
         "candidate_forms": candidates,
-        "verified_form": current[0]["form"] if verified else None,
+        "verified_form": event["form"] if verified else None,
+        "verified_submission": family["submission"] if verified and family else None,
+        "separate_calculation": family["separate_calculation"]
+        if verified and family
+        else None,
         "filing_obligation": obligation,
         "pending_acknowledgment": pending,
         "prior_filing_unverified": prior_unverified,
+        "evidence_needed": evidence_needed,
         "notice": "Candidates only unless source-backed year-specific review is recorded; employment/security ownership and balance do not establish the route.",
     }
 
@@ -2910,10 +3120,21 @@ def summary_projection(fd, state, as_of):
             next_control = "להגשת הבקשה"
         elif route["pending_acknowledgment"] or route["prior_filing_unverified"]:
             control_scope = "Retrieve the filing acknowledgment for the exact year, form and version before starting a new submission."
-        elif "correction" in route["candidate_forms"]:
-            control_scope = "Review the exact filed version and confirm the correction procedure with the tax office if an omission is verified."
+        elif route["verified_form"] == "correction":
+            control_scope = "Follow the verified correction procedure for the existing return. Preserve the filed version and reconcile both spouses' income, credits, shared accounts and withholding where applicable."
         if next_control:
             control_scope = "Public service entry only; route eligibility must be reviewed before submission."
+        if route["evidence_needed"]:
+            requests.append(
+                {
+                    "document_he": "אסמכתאות לנתיב הגשת הדוח",
+                    "issuer": "Israel Tax Authority / assessing office",
+                    "uncertainty": route["evidence_needed"],
+                    "manual_step": "Check the official instructions for the year and form and review the family file evidence with the authorized taxpayer.",
+                }
+            )
+            if next_control is None:
+                control_scope = route["evidence_needed"]
         years.append(
             {
                 "tax_year": tax_year,

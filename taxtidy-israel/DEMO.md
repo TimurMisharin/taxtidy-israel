@@ -39,3 +39,8 @@ All calls also supplied the explicit private case root and appropriate reviewed 
 **Assistant:** قرأتُ ملف الحالة المحفوظ. الاسترداد التقديري لعام 2025 هو 5,448.80 شيكل، والإقرار ما زال مسودة ولم يُقدَّم. لا حاجة لطلب نماذج טופס 106 التي جرى التحقق منها مرة أخرى. الخطوة التالية هي التحقق من أهلية مسار التقديم ومتطلبات المرفقات. «להגשת הבקשה» تعني الدخول إلى خدمة تقديم الطلب، وليست تأكيدًا لإرساله.
 
 These replies render the actual CLI state; the separate independent forward-test covers skill use with different fictional amounts and conflicting evidence. No account installation or live service behavior is claimed.
+
+## Synthetic spouse routing examples
+
+- For fictional spouses already married before 2025, an official form showing a separate-return checkbox leaves a proposed separate submission unresolved. If the year-specific route review verifies a joint Form 1301 and eligibility for separate tax calculation, record `submission: joint` and `separate_calculation: true`. If the review instead verifies two coordinated submissions for the same family file, record `submission: separate` and explain the possible joint processing.
+- For fictional spouses who married in 2025, a signed Form 4430 leaves the proposed separate route unresolved until the Authority's 2025 election and the form/channel are verified. Their 2026 route requires its own review. If the registered spouse has already filed and the office directs joint reporting, preserve the acknowledged return and use the correction route. Receiving the correction attachment, accepting the correction and issuing a revised assessment each require their own evidence.
