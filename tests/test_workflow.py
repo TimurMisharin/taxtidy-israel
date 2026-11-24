@@ -73,6 +73,46 @@ def dividend_link(events, reference="fictional-payment-link"):
     return proof
 
 
+def spouse_route(submission="separate", **family_updates):
+    event = copy.deepcopy(fixture()["phase3"]["route"])
+    event["form"] = "1301"
+    event["reference"] = "fictional-family-route-review"
+    event["review"]["fields_checked"] = ["event", "family_route"]
+    details = event["details"]
+    details.update(
+        route_status="verified",
+        filing_obligation="required",
+        rules_source={
+            "url": "https://www.gov.il/he/service/reporting-and-payment-2025-annual-tax-report-for-individuals",
+            "tax_year": 2025,
+            "form": "1301",
+            "verified_at": "2026-11-19",
+            "field": "SYNTHETIC Section A and verified family file procedure",
+        },
+    )
+    details["checks"] = dict.fromkeys(details["checks"], False)
+    details["spouse"] = dict.fromkeys(details["spouse"], "not_applicable")
+    details["spouse"].update(
+        registered_spouse="fictional-registered-spouse", marriage_year="2022"
+    )
+    details["family_route"] = {
+        "marital_status": "married",
+        "effective_date": "2022-06-01",
+        "family_file": "fictional-family-file",
+        "return_on_record": "none",
+        "return_reference": None,
+        "office_direction": "none",
+        "office_reference": None,
+        "submission": submission,
+        "separate_calculation": False,
+        "route_reference": "fictional-case-specific-route-record",
+        "form_4430_required": False,
+        "recorded_4430": None,
+        **family_updates,
+    }
+    return event
+
+
 def deadline_due_case(parent):
     root = Path(parent) / "case"
     state = case.initialize(root, "fictional-taxpayer", [2020, 2025], synthetic=True)
@@ -931,6 +971,194 @@ class WorkflowTests(unittest.TestCase):
             )
             self.assertIsNone(row["gross_forecast"]["annual_tax_forecast"])
             self.assertEqual(row["next_control_he"], "לעריכת תיאום מס")
+
+    def test_married_year_needs_a_verified_submission_route(self):
+        for mode, separately_calculated in (("separate", False), ("joint", True)):
+            with self.subTest(mode=mode), temporary() as parent:
+                root, _ = annual_baseline(parent)
+                event = spouse_route(mode, separate_calculation=separately_calculated)
+                details = event["details"]
+                if mode == "separate":
+                    legacy = copy.deepcopy(event)
+                    del legacy["details"]["family_route"]
+                    # Legacy records stay readable and cannot recommend a submission.
+                    state = case.load(root)
+                    with case.locked(root) as fd:
+                        state["routes"].append(reviewed_copy(legacy))
+                        case.atomic_text(
+                            fd, "checkpoint.json", case.canonical(state).decode()
+                        )
+                    self.assertIsNone(
+                        selected_year(json.loads(view(root).stdout))["route"][
+                            "verified_submission"
+                        ]
+                    )
+                    details["family_route"]["route_reference"] = None
+                    self.assertNotEqual(
+                        record(root, reviewed_copy(event)).returncode, 0
+                    )
+                    details["route_status"] = "unresolved"
+                    event["event_date"] = event["observed_at"] = "2026-11-20"
+                    self.assertEqual(record(root, reviewed_copy(event)).returncode, 0)
+                    route = selected_year(json.loads(view(root).stdout))["route"]
+                    self.assertEqual(route["route_status"], "unresolved")
+                    self.assertIsNone(route["verified_submission"])
+                    self.assertIn("year- and form-specific", route["evidence_needed"])
+                    details["route_status"] = "verified"
+                    details["family_route"]["route_reference"] = (
+                        "fictional-confirmed-separate-1301-procedure"
+                    )
+                    event["event_date"] = event["observed_at"] = "2026-11-21"
+                result = record(root, reviewed_copy(event))
+                self.assertEqual(result.returncode, 0, result.stderr)
+                route = selected_year(json.loads(view(root, "resume").stdout))["route"]
+                self.assertEqual(route["route_status"], "verified")
+                self.assertEqual(route["verified_form"], "1301")
+                self.assertEqual(route["verified_submission"], mode)
+                self.assertEqual(route["separate_calculation"], separately_calculated)
+
+    def test_marriage_year_needs_recorded_form_4430_and_checks_existing_return(self):
+        with temporary() as parent:
+            root, _ = annual_baseline(parent)
+            event = spouse_route(effective_date="2025-06-01", form_4430_required=True)
+            details = event["details"]
+            details["checks"]["family_change"] = True
+            details["spouse"].update(
+                marriage_year="2025", form_4430="fictional signed declaration"
+            )
+            self.assertNotEqual(record(root, reviewed_copy(event)).returncode, 0)
+            details["route_status"] = "unresolved"
+            self.assertEqual(record(root, reviewed_copy(event)).returncode, 0)
+            route = selected_year(json.loads(view(root).stdout))["route"]
+            self.assertIn("Form 4430 election recorded", route["evidence_needed"])
+            event["event_date"] = event["observed_at"] = "2026-11-20"
+            details["route_status"] = "verified"
+            family = details["family_route"]
+            family["recorded_4430"] = {
+                "tax_year": 2025,
+                "submission": "separate",
+                "reference": "fictional-authority-election-record",
+            }
+            result = record(root, reviewed_copy(event))
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(
+                selected_year(json.loads(view(root).stdout))["route"][
+                    "verified_submission"
+                ],
+                "separate",
+            )
+            event["event_date"] = event["observed_at"] = "2026-11-21"
+            family.update(
+                return_on_record="filed", return_reference="fictional-spouse-return-v1"
+            )
+            self.assertNotEqual(record(root, reviewed_copy(event)).returncode, 0)
+            family.update(
+                office_direction="separate",
+                office_reference="fictional-office-confirmed-still-available",
+            )
+            result = record(root, reviewed_copy(event))
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(
+                selected_year(json.loads(view(root).stdout))["route"][
+                    "verified_submission"
+                ],
+                "separate",
+            )
+
+    def test_form_4430_cannot_be_carried_forward(self):
+        with temporary() as parent:
+            root, _ = annual_baseline(parent)
+            event = spouse_route(
+                recorded_4430={
+                    "tax_year": 2022,
+                    "submission": "separate",
+                    "reference": "fictional-2022-election-record",
+                }
+            )
+            self.assertIn(
+                "form_4430_change_year_required",
+                record(root, reviewed_copy(event)).stderr,
+            )
+            event["details"]["family_route"]["recorded_4430"] = None
+            event["details"]["spouse"]["form_4430"] = "fictional 2022 Form 4430"
+            self.assertIn(
+                "form_4430_change_year_required",
+                record(root, reviewed_copy(event)).stderr,
+            )
+
+    def test_filed_spouse_with_written_joint_direction_uses_existing_return(self):
+        with temporary() as parent:
+            root, _ = annual_baseline(parent)
+            event = spouse_route(
+                "joint",
+                return_on_record="assessed",
+                return_reference="fictional-family-1301-v1-and-assessment",
+                office_direction="correct_joint",
+                office_reference="fictional-written-assessing-office-direction",
+            )
+            event["details"]["checks"]["prior_filing"] = True
+            self.assertNotEqual(record(root, reviewed_copy(event)).returncode, 0)
+            event["details"]["family_route"]["submission"] = "separate"
+            self.assertNotEqual(record(root, reviewed_copy(event)).returncode, 0)
+            event["details"]["route_status"] = "unresolved"
+            self.assertEqual(record(root, reviewed_copy(event)).returncode, 0)
+            route = selected_year(json.loads(view(root).stdout))["route"]
+            self.assertEqual(route["candidate_forms"], ["correction"])
+            self.assertIsNone(route["verified_form"])
+            event["event_date"] = event["observed_at"] = "2026-11-20"
+            event["details"]["route_status"] = "verified"
+            event["details"]["family_route"]["submission"] = "joint"
+            event["form"] = event["details"]["rules_source"]["form"] = "correction"
+            event["details"]["rules_source"].update(
+                url="https://www.gov.il/BlobFolder/policy/inst-03-2023/he/IncomeTax_inst-03-2023.pdf",
+                field="SYNTHETIC section 8.4.4 procedure for filed Form 1301",
+            )
+            result = record(root, reviewed_copy(event))
+            self.assertEqual(result.returncode, 0, result.stderr)
+            row = selected_year(json.loads(view(root).stdout))
+            self.assertEqual(row["route"]["candidate_forms"], ["correction"])
+            self.assertEqual(row["route"]["verified_form"], "correction")
+            self.assertIsNone(row["next_control_he"])
+            self.assertIn("withholding", row["control_scope"])
+
+            original = reviewed_copy(
+                fixture()["phase3"]["draft"],
+                form="1301",
+                details={"status": "filing_acknowledged"},
+            )
+            original_result = record(root, original)
+            self.assertEqual(original_result.returncode, 0, original_result.stderr)
+            attachment = reviewed_copy(
+                fixture()["phase3"]["accepted"],
+                form="correction",
+                draft_version="correction-1",
+            )
+            result = record(root, attachment)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            filing = selected_year(json.loads(view(root).stdout))["filing"]
+            self.assertEqual(filing["attachments"][-1]["status"], "accepted")
+            self.assertEqual(filing["corrections"], [])
+            for status in ("correction_accepted", "revised_assessment_issued"):
+                outcome = reviewed_copy(
+                    original,
+                    form="correction",
+                    draft_version="correction-1",
+                    reference="fictional-" + status,
+                    details={"status": status},
+                )
+                result = record(root, outcome)
+                self.assertEqual(result.returncode, 0, result.stderr)
+            filing = selected_year(json.loads(view(root, "resume").stdout))["filing"]
+            self.assertEqual(filing["state"], "filing_completed")
+            self.assertEqual(len(filing["returns"]), 1)
+            self.assertEqual(
+                filing["returns"][0]["acknowledgments"][0]["reference"],
+                original["reference"],
+            )
+            self.assertEqual(
+                {e["details"]["status"] for e in filing["corrections"]},
+                {"correction_accepted", "revised_assessment_issued"},
+            )
 
     def test_route_review_and_deadline_extension_require_evidence(self):
         with temporary() as parent:
